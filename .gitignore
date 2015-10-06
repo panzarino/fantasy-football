@@ -62,5 +62,5 @@ target/
 # Secret keys and such
 secret.py
 
-#DB
+# DB
 db.sqlite3
