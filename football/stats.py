@@ -1,4 +1,4 @@
-import nflgame
+import nflgame # https://github.com/BurntSushi/nflgame
 
 def byeweek(team, year):
     # takes team symbol (3 letters) and year of bye week
@@ -17,7 +17,7 @@ def byeweek(team, year):
     return 0
 
 def flexstats(name, year, wk):
-    # takes players full name (string), year of game (int), week of game (int)
+    # takes players full name, year of game, week of game(s)
     # applies for all players that can play in the flex (RB, WR, TE)
     playerlist = nflgame.find(name, team=None)
     if playerlist == []:
@@ -42,7 +42,7 @@ def flexstats(name, year, wk):
     # returns rushing yards, rushing tds, receiving yard, receiving tds
     
 def qbstats(name, year, wk):
-    # takes players full name (string), year of game (int), week of game (int)
+    # takes players full name, year of game, week of game(s)
     # applies for all quarterbacks
     playerlist = nflgame.find(name, team=None)
     if playerlist == []:
@@ -59,7 +59,7 @@ def qbstats(name, year, wk):
         for p in gameplayers.passing():
             if p.name == player.gsis_name:
                 passyds=p.passing_yds
-                rushtd=p.passing_tds
+                passtd=p.passing_tds
                 inter=p.passing_ints
         for p in gameplayers.rushing():
             if p.name == player.gsis_name:
