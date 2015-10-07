@@ -24,21 +24,18 @@ def flexstats(name, year, wk):
         return False
     else:
         player = playerlist[0]
-        rushyds=0
-        rushtd=0
-        recyds=0
-        rectd=0
+        stats = {'rushing_yds':0, 'rushing_tds':0, 'receiving_yds':0, 'receiving_tds':0}
         games = nflgame.games(year, week=wk)
         gameplayers = nflgame.combine_game_stats(games)
         for p in gameplayers.rushing():
             if p.name == player.gsis_name:
-                rushyds=p.rushing_yds
-                rushtd=p.rushing_tds
+                stats['rushing_yds']=p.rushing_yds
+                stats['rushing_tds']=p.rushing_tds
         for p in gameplayers.receiving():
             if p.name == player.gsis_name:
-                recyds=p.receiving_yds
-                rectd=p.receiving_tds
-    return [rushyds, rushtd, recyds, rectd]
+                stats['receiving_yds']=p.receiving_yds
+                stats['receiving_tds']=p.receiving_tds
+    return stats
     # returns rushing yards, rushing tds, receiving yard, receiving tds
     
 def qbstats(name, year, wk):
@@ -49,22 +46,18 @@ def qbstats(name, year, wk):
         return False
     else:
         player = playerlist[0]
-        passyds=0
-        passtd=0
-        inter=0
-        rushyds=0
-        rushtd=0
+        stats = {'rushing_yds':0, 'rushing_tds':0, 'passing_yds':0, 'passing_tds':0, 'passing_ints':0}
         games = nflgame.games(year, week=wk)
         gameplayers = nflgame.combine_game_stats(games)
         for p in gameplayers.passing():
             if p.name == player.gsis_name:
-                passyds=p.passing_yds
-                passtd=p.passing_tds
-                inter=p.passing_ints
+                stats['passing_yds']=p.passing_yds
+                stats['passing_tds']=p.passing_tds
+                stats['passing_ints']=p.passing_ints
         for p in gameplayers.rushing():
             if p.name == player.gsis_name:
-                rushyds=p.rushing_yds
-                rushtd=p.rushing_tds
-        return [passyds, passtd, inter, rushyds, rushtd]
+                stats['rushing_yds']=p.rushing_yds
+                stats['rushing_tds']=p.rushing_tds
+        return stats
 
-# Note: still need to add some stats such as fumbles
+# Note: still need to add some stats such as fumbles, change to dictionary not array
