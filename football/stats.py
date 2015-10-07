@@ -24,19 +24,17 @@ def flexstats(name, year, wk):
         return False
     else:
         player = playerlist[0]
-        stats = {'rushing_yds':0, 'rushing_tds':0, 'receiving_yds':0, 'receiving_tds':0}
+        stats = {'rushing_yds':0, 'rushing_tds':0, 'receiving_yds':0, 'receiving_tds':0, 'fumbles':0}
         games = nflgame.games(year, week=wk)
         gameplayers = nflgame.combine_game_stats(games)
-        for p in gameplayers.rushing():
+        for p in gameplayers:
             if p.name == player.gsis_name:
-                stats['rushing_yds']=p.rushing_yds
-                stats['rushing_tds']=p.rushing_tds
-        for p in gameplayers.receiving():
-            if p.name == player.gsis_name:
-                stats['receiving_yds']=p.receiving_yds
-                stats['receiving_tds']=p.receiving_tds
+                stats['rushing_yds']+=p.rushing_yds
+                stats['rushing_tds']+=p.rushing_tds
+                stats['receiving_yds']+=p.receiving_yds
+                stats['receiving_tds']+=p.receiving_tds
+                stats['fumbles']+=p.fumbles_tot
     return stats
-    # returns rushing yards, rushing tds, receiving yard, receiving tds
     
 def qbstats(name, year, wk):
     # takes players full name, year of game, week of game(s)
@@ -46,18 +44,15 @@ def qbstats(name, year, wk):
         return False
     else:
         player = playerlist[0]
-        stats = {'rushing_yds':0, 'rushing_tds':0, 'passing_yds':0, 'passing_tds':0, 'passing_ints':0}
+        stats = {'rushing_yds':0, 'rushing_tds':0, 'passing_yds':0, 'passing_tds':0, 'passing_ints':0, 'fumbles':0}
         games = nflgame.games(year, week=wk)
         gameplayers = nflgame.combine_game_stats(games)
-        for p in gameplayers.passing():
+        for p in gameplayers:
             if p.name == player.gsis_name:
-                stats['passing_yds']=p.passing_yds
-                stats['passing_tds']=p.passing_tds
-                stats['passing_ints']=p.passing_ints
-        for p in gameplayers.rushing():
-            if p.name == player.gsis_name:
-                stats['rushing_yds']=p.rushing_yds
-                stats['rushing_tds']=p.rushing_tds
+                stats['passing_yds']+=p.passing_yds
+                stats['passing_tds']+=p.passing_tds
+                stats['passing_ints']+=p.passing_ints
+                stats['rushing_yds']+=p.rushing_yds
+                stats['rushing_tds']+=p.rushing_tds
+                stats['fumbles']+=p.fumbles_tot
         return stats
-
-# Note: still need to add some stats such as fumbles, change to dictionary not array
