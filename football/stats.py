@@ -16,7 +16,7 @@ def byeweek(team, year):
             return x
     return 0
 
-def flexstats(name, year, wk):
+def flex_stats(name, year, wk):
     # takes players full name, year of game, week of game(s)
     # applies for all players that can play in the flex (RB, WR, TE)
     playerlist = nflgame.find(name, team=None)
@@ -34,9 +34,9 @@ def flexstats(name, year, wk):
                 stats['receiving_yds']+=p.receiving_yds
                 stats['receiving_tds']+=p.receiving_tds
                 stats['fumbles']+=p.fumbles_tot
-    return stats
+        return stats
     
-def qbstats(name, year, wk):
+def qb_stats(name, year, wk):
     # takes players full name, year of game, week of game(s)
     # applies for all quarterbacks
     playerlist = nflgame.find(name, team=None)
@@ -56,3 +56,23 @@ def qbstats(name, year, wk):
                 stats['rushing_tds']+=p.rushing_tds
                 stats['fumbles']+=p.fumbles_tot
         return stats
+
+def k_stats(name, year, wk):
+    # takes players full name, year of game, week of game(s)
+    # applies for all kickers
+    playerlist = nflgame.find(name, team=None)
+    if playerlist == []:
+        return False
+    else:
+        player = playerlist[0]
+        stats = {'fgmade':0, 'fga':0, 'xpmade':0, 'xpa':0}
+        games = nflgame.games(year, week=wk)
+        gameplayers = nflgame.combine_game_stats(games)
+        for p in gameplayers:
+            if p.name == player.gsis_name:
+                stats['fgmade']+=p.kicking_fgm
+                stats['fga']+=p.kicking_fga
+                stats['xpmade']+=p.kicking_xpmade
+                stats['xpa']+=p.kicking_xpa
+        return stats
+        # need to find way to get fg yards
