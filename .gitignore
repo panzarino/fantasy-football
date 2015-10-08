@@ -64,3 +64,6 @@ secret.py
 
 # DB
 db.sqlite3
+
+# Test Files
+test.py

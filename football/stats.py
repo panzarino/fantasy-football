@@ -24,7 +24,7 @@ def flex_stats(name, year, wk):
         return False
     else:
         player = playerlist[0]
-        stats = {'rushing_yds':0, 'rushing_tds':0, 'receiving_yds':0, 'receiving_tds':0, 'fumbles':0}
+        stats = {'rushing_yds':0, 'rushing_tds':0, 'receiving_yds':0, 'receiving_tds':0, 'fumbles':0, 'puntret_tds':0, 'kickret_tds':0}
         games = nflgame.games(year, week=wk)
         gameplayers = nflgame.combine_game_stats(games)
         for p in gameplayers:
@@ -34,6 +34,8 @@ def flex_stats(name, year, wk):
                 stats['receiving_yds']+=p.receiving_yds
                 stats['receiving_tds']+=p.receiving_tds
                 stats['fumbles']+=p.fumbles_tot
+                stats['puntret_tds']+=p.puntret_tds
+                stats['kickret_tds']+=p.kickret_tds
         return stats
     
 def qb_stats(name, year, wk):
@@ -75,4 +77,3 @@ def k_stats(name, year, wk):
                 stats['xpmade']+=p.kicking_xpmade
                 stats['xpa']+=p.kicking_xpa
         return stats
-        # need to find way to get fg yards
