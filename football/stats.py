@@ -24,12 +24,11 @@ def flex_stats(name, year, wk):
         return False
     else:
         player = playerlist[0]
-        playername = player.first_name[0]+"."+player.last_name
         stats = {'rushing_yds':0, 'rushing_tds':0, 'receiving_yds':0, 'receiving_tds':0, 'fumbles':0, 'puntret_tds':0, 'kickret_tds':0}
         games = nflgame.games(year, week=wk)
         gameplayers = nflgame.combine_game_stats(games)
         for p in gameplayers:
-            if p.name == playername:
+            if p.name == player.gsis_name:
                 stats['rushing_yds']+=p.rushing_yds
                 stats['rushing_tds']+=p.rushing_tds
                 stats['receiving_yds']+=p.receiving_yds
@@ -47,12 +46,11 @@ def qb_stats(name, year, wk):
         return False
     else:
         player = playerlist[0]
-        playername = player.first_name[0]+"."+player.last_name
         stats = {'rushing_yds':0, 'rushing_tds':0, 'passing_yds':0, 'passing_tds':0, 'passing_ints':0, 'fumbles':0}
         games = nflgame.games(year, week=wk)
         gameplayers = nflgame.combine_game_stats(games)
         for p in gameplayers:
-            if p.name == playername:
+            if p.name == player.gsis_name:
                 stats['passing_yds']+=p.passing_yds
                 stats['passing_tds']+=p.passing_tds
                 stats['passing_ints']+=p.passing_ints
@@ -69,12 +67,11 @@ def k_stats(name, year, wk):
         return False
     else:
         player = playerlist[0]
-        playername = player.first_name[0]+"."+player.last_name
         stats = {'fgmade':0, 'fga':0, 'xpmade':0, 'xpa':0}
         games = nflgame.games(year, week=wk)
         gameplayers = nflgame.combine_game_stats(games)
         for p in gameplayers:
-            if p.name == playername:
+            if p.name == player.gsis_name:
                 stats['fgmade']+=p.kicking_fgm
                 stats['fga']+=p.kicking_fga
                 stats['xpmade']+=p.kicking_xpmade
