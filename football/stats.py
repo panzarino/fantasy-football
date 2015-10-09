@@ -8,7 +8,7 @@ def flex_stats(name, year, wk):
         return False
     else:
         player = playerlist[0]
-        stats = {'rushing_yds':0, 'rushing_tds':0, 'receiving_yds':0, 'receiving_tds':0, 'fumbles':0, 'puntret_tds':0, 'kickret_tds':0}
+        stats = {'rushing_yds':0, 'rushing_tds':0, 'receiving_yds':0, 'receiving_tds':0, 'fumbles':0, 'puntret_tds':0, 'kickret_tds':0, 'rushing_2pt':0, 'receiving_2pt':0}
         games = nflgame.games(year, week=wk)
         gameplayers = nflgame.combine_game_stats(games)
         for p in gameplayers:
@@ -20,6 +20,8 @@ def flex_stats(name, year, wk):
                 stats['fumbles']=p.fumbles_tot
                 stats['puntret_tds']=p.puntret_tds
                 stats['kickret_tds']=p.kickret_tds
+                stats['rushing_2pt']=p.rushing_twoptm
+                stats['receiving_2pt']=p.receiving_twoptm
         return stats
     
 def qb_stats(name, year, wk):
@@ -30,7 +32,7 @@ def qb_stats(name, year, wk):
         return False
     else:
         player = playerlist[0]
-        stats = {'rushing_yds':0, 'rushing_tds':0, 'passing_yds':0, 'passing_tds':0, 'passing_ints':0, 'fumbles':0}
+        stats = {'rushing_yds':0, 'rushing_tds':0, 'passing_yds':0, 'passing_tds':0, 'passing_ints':0, 'fumbles':0, 'rushing_2pt':0, 'passing_2pt':0}
         games = nflgame.games(year, week=wk)
         gameplayers = nflgame.combine_game_stats(games)
         for p in gameplayers:
@@ -41,6 +43,8 @@ def qb_stats(name, year, wk):
                 stats['rushing_yds']=p.rushing_yds
                 stats['rushing_tds']=p.rushing_tds
                 stats['fumbles']=p.fumbles_tot
+                stats['rushing_2pt']=p.rushing_twoptm
+                stats['passing_2pt']=p.passing_twoptm
         return stats
 
 def k_stats(name, year, wk):
