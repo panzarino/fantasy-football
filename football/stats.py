@@ -1,29 +1,15 @@
 import nflgame # https://github.com/BurntSushi/nflgame
 
+def total_stats(name, year, max_wk):
+    wks = []
+    for x in range(1, (max_wk+1)):
+        wks.append(x)
+    return player_stats(name, year, wks)
+
 def player_stats(name, year, wk):
     # takes player's full name, year of game(s), week of game(s)
     # returns stats based on player's position
     playerlist = nflgame.find(name, team=None)
-    if playerlist == []:
-        return False
-    player = playerlist[0]
-    player_id = player.gsis_id
-    player_position = player.position
-    if player_position == 'RB' or player_position == 'WR' or player_position == 'TE':
-        output = flex_stats(player_id, year, wk)
-    elif player_position == 'QB':
-        output = qb_stats(player_id, year, wk)
-    elif player_position == "K":
-        output = k_stats(player_id, year, wk)
-    else:
-        output = False
-    return output
-    
-def player_stats_team(name, tm, year, wk):
-    # takes player's full name, team symbol (2 or 3 letters), year of game(s), week of game(s)
-    # returns stats based on player's position
-    # used when there are two players with the same name
-    playerlist = nflgame.find(name, team=tm)
     if playerlist == []:
         return False
     player = playerlist[0]

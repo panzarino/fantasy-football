@@ -7,11 +7,11 @@ def find(team, year):
     for x in range(1, 18):
         games = nflgame.games(year, week=x, home=None, away=None, kind='REG', started=False)
         if games == []:
-            return 0
+            return None
         weekteams = []
         for i in games:
             weekteams.append(i.home)
             weekteams.append(i.away)
         if team not in weekteams and weekteams!=[]:
             return x
-    return 0
+    return None
