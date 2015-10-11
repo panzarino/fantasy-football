@@ -1,11 +1,11 @@
 import nflgame # https://github.com/BurntSushi/nflgame
-from football import stats, bye_week
+from football import stats, schedule
 
 def get_stats(name, year, wks):
     # gets stats for a player
     # note: weeks must be defined as a list
     player = nflgame.find(name, team=None)[0]
-    byeweek = bye_week.find(player.team, year)
+    byeweek = schedule.bye_week(player.team, year)
     player_stats = {}
     for x in range(0, len(wks)):
         dictprop = 'week_'+str(wks[x])
