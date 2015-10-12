@@ -44,6 +44,7 @@ def main_stats(player_id, year, wk):
             stats['passing_tds']=p.passing_tds
             stats['passing_ints']=p.passing_ints
             stats['passing_2pt']=p.passing_twoptm
+            stats['receptions']=p.receiving_rec
     return stats
 
 def k_stats(player_id, year, wk):
