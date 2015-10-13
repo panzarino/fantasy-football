@@ -109,3 +109,15 @@ def decimal_ppr_player_points(name, year, wks):
         points[x]['bye_week']=player_stats[x]['bye_week']
         points[x]['receptions']=player_stats[x]['receptions']
     return points
+
+def total_points(points):
+    # accepts dictionary of single game points
+    total_points = {}
+    for x in points:
+        total_points[x]={}
+    for x in points:
+        total = 0
+        for i in points[x]:
+            total+=points[x][i]
+        total_points[x]=total
+    return total_points
