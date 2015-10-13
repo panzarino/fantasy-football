@@ -83,7 +83,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-import os.path
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'html'),
 )
