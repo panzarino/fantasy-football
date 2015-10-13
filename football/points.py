@@ -19,7 +19,6 @@ def get_stats(name, year, wks):
 def standard_player_points(name, year, wks):
     # returns standard scoring points
     player_stats = get_stats(name, year, wks)
-    print player_stats
     points = {}
     for x in player_stats:
         points[x]={}
@@ -43,7 +42,6 @@ def standard_player_points(name, year, wks):
 def decimal_player_points(name, year, wks):
     # returns standard decimal scoring points
     player_stats = get_stats(name, year, wks)
-    print player_stats
     points = {}
     for x in player_stats:
         points[x]={}
@@ -67,7 +65,6 @@ def decimal_player_points(name, year, wks):
 def standard_ppr_player_points(name, year, wks):
     # returns standard scoring points
     player_stats = get_stats(name, year, wks)
-    print player_stats
     points = {}
     for x in player_stats:
         points[x]={}
@@ -92,7 +89,6 @@ def standard_ppr_player_points(name, year, wks):
 def decimal_ppr_player_points(name, year, wks):
     # returns standard scoring points
     player_stats = get_stats(name, year, wks)
-    print player_stats
     points = {}
     for x in player_stats:
         points[x]={}
