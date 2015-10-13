@@ -10,6 +10,7 @@ def get_stats(name, year, wks):
     for x in range(0, len(wks)):
         dictprop = 'week_'+str(wks[x])
         player_stats[dictprop]=(stats.player_stats(name, year, wks[x]))
+        player_stats[dictprop]['week']=wks[x]
         if wks[x] == byeweek:
             player_stats[dictprop]['bye_week'] = True
         else:
@@ -37,6 +38,8 @@ def standard_player_points(name, year, wks):
         points[x]['passing_ints']=player_stats[x]['passing_ints']*(-2)
         points[x]['passing_2pt']=player_stats[x]['passing_2pt']*2
         points[x]['bye_week']=player_stats[x]['bye_week']
+        points[x]['receptions']=player_stats[x]['receptions']
+        points[x]['week']=player_stats[x]['week']
     return points
 
 def decimal_player_points(name, year, wks):
@@ -60,6 +63,8 @@ def decimal_player_points(name, year, wks):
         points[x]['passing_ints']=player_stats[x]['passing_ints']*(-2)
         points[x]['passing_2pt']=player_stats[x]['passing_2pt']*2
         points[x]['bye_week']=player_stats[x]['bye_week']
+        points[x]['receptions']=player_stats[x]['receptions']
+        points[x]['week']=player_stats[x]['week']
     return points
 
 def standard_ppr_player_points(name, year, wks):
@@ -84,6 +89,7 @@ def standard_ppr_player_points(name, year, wks):
         points[x]['passing_2pt']=player_stats[x]['passing_2pt']*2
         points[x]['bye_week']=player_stats[x]['bye_week']
         points[x]['receptions']=player_stats[x]['receptions']
+        points[x]['week']=player_stats[x]['week']
     return points
 
 def decimal_ppr_player_points(name, year, wks):
@@ -108,6 +114,7 @@ def decimal_ppr_player_points(name, year, wks):
         points[x]['passing_2pt']=player_stats[x]['passing_2pt']*2
         points[x]['bye_week']=player_stats[x]['bye_week']
         points[x]['receptions']=player_stats[x]['receptions']
+        points[x]['week']=player_stats[x]['week']
     return points
 
 def total_points(points):
