@@ -1,2 +1,4 @@
-from football import stats, points
+import django
 
+def index(request):
+    return django.shortcuts.render(request, 'index.html')
