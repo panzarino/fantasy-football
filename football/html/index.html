@@ -1,19 +1,16 @@
-{% extends 'external/index.html' %}
+{% extends 'external/header.html' %}
 
 {% block title %}Testing{% endblock %}
 
 {% load staticfiles %}
-{% block body %}
-    <!-- Header -->
-    <header id="top" class="header">
-        <div class="text-vertical-center">
-            <h1>Start Bootstrap</h1>
-            <h3>Free Bootstrap Themes &amp; Templates</h3>
-            <br>
-            <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
-        </div>
-    </header>
+    {% block headercontent %}
+        <h1>Start Bootstrap</h1>
+        <h3>Free Bootstrap Themes &amp; Templates</h3>
+        <br>
+        <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
+    {% endblock %}
 
+{% block body %}
     <!-- About -->
     <section id="about" class="about">
         <div class="container">
