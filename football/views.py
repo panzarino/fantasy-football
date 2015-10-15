@@ -1,4 +1,5 @@
 import django
+from football import points
 
 def index(request):
     return django.shortcuts.render(request, 'index.html')

@@ -7,15 +7,37 @@
         <h1>Search</h1>
         <h3>Search for a player or team</h3>
         <br>
-        <form class="form-inline" method="GET" action="results" id="searchform" onsubmit="$('#loading').show();">
+        <form class="form-inline" method="GET" action="results" id="searchform" onsubmit="$('body').addClass('loading');">
             <div class="form-group">
                 <input type="text" class="form-control" id="name" name="name" placeholder="Search" style="min-width: 300px;" required>
             </div>
             <button type="submit" class="btn btn-dark btn-md">Search</button>
         </form>
         <br>
-        <img src="{% static 'img/loading.gif' %}" style="display: none;" id="loading">
-    {% endblock %}
+        <div class="modal">
+        </div>
+        <style>
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background: rgba( 255, 255, 255, .8 ) 
+                            url("{% static 'img/loading.gif' %}") 
+                            50% 50% 
+                            no-repeat;
+                }
+            body.loading {
+                overflow: hidden;   
+            }
+            body.loading .modal {
+                display: block;
+            }
+        </style>
+        {% endblock %}
 
 {% block body %}
 {% endblock %}
