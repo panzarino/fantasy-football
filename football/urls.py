@@ -4,6 +4,8 @@ from football import views
 
 urlpatterns = patterns('',
     url(r'^$', views.index),
+    url(r'^search/$', views.search),
+    url(r'^search/results/$', views.results),
     
     # url(r'^admin/', include(admin.site.urls)),
 )

@@ -42,24 +42,17 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="#top"  onclick = $("#menu-close").click(); >Fantasy Football</a>
+                <a href="/"  onclick = $("#menu-close").click(); >Fantasy Football</a>
             </li>
             <li>
-                <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+                <a href="/" onclick = $("#menu-close").click(); >Home</a>
             </li>
             <li>
-                <a href="#about" onclick = $("#menu-close").click(); >About</a>
+                <a href="search" onclick = $("#menu-close").click(); >Search</a>
             </li>
             <li>
-                <a href="#services" onclick = $("#menu-close").click(); >Services</a>
+                <a href="about" onclick = $("#menu-close").click(); >About</a>
             </li>
-            <li>
-                <a href="#portfolio" onclick = $("#menu-close").click(); >Portfolio</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >Contact</a>
-            </li>
-        </ul>
     </nav>
     
     {% block header %}
@@ -74,7 +67,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>Fantasy Football</strong>
+                    <h4><strong>Fantasy Football Predictor</strong>
                     <hr class="small">
                     <p class="text-muted">Copyright &copy; Zach Panzarino 2015</p>
                 </div>
@@ -86,7 +79,7 @@
     <script src="{% static 'external/js/jquery.js' %}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'external/js/bootstrap.min.js' %}"></script>
 
     <!-- Custom JavaScript -->
     <script>
