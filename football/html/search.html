@@ -8,11 +8,29 @@
         <h3>Type the full name of the player</h3>
         <h3 class="text-muted">Ex. "Russell Wilson"</h3>
         <br>
-        <form class="form-inline" method="GET" action="results" id="searchform" onsubmit="$('body').addClass('loading');">
+        <form method="GET" action="results" id="searchform" onsubmit="$('body').addClass('loading');">
+            <div class="form-inline">
             <div class="form-group">
-                <input type="text" class="form-control" id="name" name="name" placeholder="Search" style="min-width: 300px;" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Search" style="min-width: 300px;" required autofocus>
             </div>
             <button type="submit" class="btn btn-dark btn-md">Search</button>
+            </div>
+            <br>
+            <div class="form-group">
+                <h4 class="text-muted">Scoring Type</h4>
+                <label class="radio-inline">
+                    <input type="radio" name="scoring" id="standard" value="standard" checked> Standard
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="scoring" id="decimal" value="decimal"> Decimal
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="scoring" id="standard_ppr" value="standard_ppr"> Standard PPR
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="scoring" id="decimal_ppr" value="decimal_ppr"> Decimal PPR
+                </label>
+            </div>
         </form>
         <br>
         <div class="modal">

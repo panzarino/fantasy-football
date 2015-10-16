@@ -1,0 +1,26 @@
+{% extends 'external/main.html' %}
+
+{% block title %}{{ title }} | Fantasy Football Predictor{% endblock %}
+
+{% load staticfiles %}
+
+{% block body %}
+{% if error %}
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>Player not found!</h1>
+            <h3>Click <a href="/search/">here</a> to search again</h3>
+        </div>
+    </header>
+{% else %}
+    <aside class="call-to-action bg-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1>{{ name }}</h1>
+                </div>
+            </div>
+        </div>
+    </aside>
+{% endif %}
+{% endblock %}

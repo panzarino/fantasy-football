@@ -26,7 +26,7 @@ def player_stats(name, year, wk):
 def main_stats(player_id, year, wk):
     # takes player's id, year of game(s), week of game(s)
     # applies for all skill position players (QB, RB, WR, TE)
-    stats = {'rushing_yds':0, 'rushing_tds':0, 'receiving_yds':0, 'receiving_tds':0, 'fumbles':0, 'puntret_tds':0, 'kickret_tds':0, 'rushing_2pt':0, 'receiving_2pt':0, 'passing_yds':0, 'passing_tds':0, 'passing_ints':0, 'passing_2pt':0}
+    stats = {'rushing_yds':0, 'rushing_tds':0, 'receiving_yds':0, 'receiving_tds':0, 'fumbles':0, 'puntret_tds':0, 'kickret_tds':0, 'rushing_2pt':0, 'receiving_2pt':0, 'passing_yds':0, 'passing_tds':0, 'passing_ints':0, 'passing_2pt':0, 'receptions':0}
     games = nflgame.games(year, week=wk)
     gameplayers = nflgame.combine_game_stats(games)
     for p in gameplayers:

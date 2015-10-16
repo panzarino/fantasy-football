@@ -4,7 +4,10 @@ from football import stats, schedule
 def get_stats(name, year, wks):
     # gets stats for a player
     # note: weeks must be defined as a list
-    player = nflgame.find(name, team=None)[0]
+    playersearch = nflgame.find(name, team=None)
+    if playersearch == []:
+        return False
+    player = playersearch[0]
     byeweek = schedule.bye_week(player.team, year)
     player_stats = {}
     for x in range(0, len(wks)):
@@ -20,6 +23,8 @@ def get_stats(name, year, wks):
 def standard_player_points(name, year, wks):
     # returns standard scoring points
     player_stats = get_stats(name, year, wks)
+    if player_stats == False:
+        return False
     points = {}
     for x in player_stats:
         points[x]={}
@@ -45,6 +50,8 @@ def standard_player_points(name, year, wks):
 def decimal_player_points(name, year, wks):
     # returns standard decimal scoring points
     player_stats = get_stats(name, year, wks)
+    if player_stats == False:
+        return False
     points = {}
     for x in player_stats:
         points[x]={}
@@ -70,6 +77,8 @@ def decimal_player_points(name, year, wks):
 def standard_ppr_player_points(name, year, wks):
     # returns standard scoring points
     player_stats = get_stats(name, year, wks)
+    if player_stats == False:
+        return False
     points = {}
     for x in player_stats:
         points[x]={}
@@ -95,6 +104,8 @@ def standard_ppr_player_points(name, year, wks):
 def decimal_ppr_player_points(name, year, wks):
     # returns standard scoring points
     player_stats = get_stats(name, year, wks)
+    if player_stats == False:
+        return False
     points = {}
     for x in player_stats:
         points[x]={}
