@@ -30,4 +30,4 @@ def scoreboard(request):
     scores = []
     for x in games:
         scores.append(x)
-    return render(request, 'scoreboard.html', {'scores':scores})
+    return render(request, 'scoreboard.html', {'scores':scores,'week':current_week})
