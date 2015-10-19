@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 from football import points, stats, schedule
 import nflgame # https://github.com/BurntSushi/nflgame/
 from datetime import date
@@ -30,4 +31,25 @@ def scoreboard(request):
     scores = []
     for x in games:
         scores.append(x)
-    return render(request, 'scoreboard.html', {'scores':scores,'week':current_week})
+    weeks = []
+    for x in range(0,current_week):
+        weeks.append(x+1)
+    return render(request, 'scoreboard.html', {'scores':scores,'week':current_week, 'past_weeks':weeks})
+
+def previous_scoreboard(request, offset):
+    try:
+        wk = int(offset)
+    except ValueError:
+        raise Http404()
+    current_week = schedule.current_week()
+    if wk>current_week:
+        raise Http404()
+    year = date.today().year
+    games = nflgame.games(year, week=wk)
+    scores = []
+    for x in games:
+        scores.append(x)
+    weeks = []
+    for x in range(0,current_week):
+        weeks.append(x+1)
+    return render(request, 'previous_scoreboard.html', {'scores':scores,'week':wk, 'past_weeks':weeks})

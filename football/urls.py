@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^search/$', views.search),
     url(r'^search/results/$', views.results),
     url(r'^scoreboard/$', views.scoreboard),
+    url(r'^scoreboard/(\d{1,2})/$', views.previous_scoreboard),
     
     # url(r'^admin/', include(admin.site.urls)),
 )
