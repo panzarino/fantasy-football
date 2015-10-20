@@ -22,5 +22,19 @@
             </div>
         </div>
     </aside>
+    <aside class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    Total Stats:<br>
+                    {% for stat, val in total_stats.items %}
+                        {{ stat }}: 
+                        {{ val }}
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </aside>
 {% endif %}
 {% endblock %}

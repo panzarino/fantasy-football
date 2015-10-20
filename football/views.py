@@ -11,18 +11,29 @@ def search(request):
     return render(request, 'search.html')
     
 def results(request):
-    if 'name' not in request.GET:
+    if 'name' not in request.GET or 'scoring' not in request.GET:
         return render(request, 'results.html', {'error':True, 'title':"Error"})
     name = request.GET['name']
+    scoring = request.GET['scoring']
     year = date.today().year
     week = schedule.current_week()
     weeks = []
     for x in range(1,week+1):
         weeks.append(x)
-    results = points.standard_player_points(name, year, weeks)
+    if scoring == 'standard':
+        results = points.standard_player_points(name, year, weeks)
+    elif scoring == 'decimal':
+        results = points.decimal_player_points(name, year, weeks)
+    elif scoring == 'standard_ppr':
+        results = points.standard_ppr_player_points(name, year, weeks)
+    elif scoring == 'decimal_ppr':
+        results = points.decimal_ppr_player_points(name, year, weeks)
+    else:
+        return render(request, 'results.html', {'error':True, 'title':"Error"})
     if results == False:
         return render(request, 'results.html', {'error':True, 'title':"Error"})
-    return render(request, 'results.html', {'title':name, 'name':name})
+    total_stats = stats.total_stats(name, year, week);
+    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':total_stats, 'results':results})
 
 def scoreboard(request):
     current_week = schedule.current_week()
