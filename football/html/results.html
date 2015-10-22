@@ -27,7 +27,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h3>Total Points by Week</h3>
-                    <p class="text-muted">Does Not Include Bye Week (Week {{ bye_week }})</p>
+                    {% if bye_week %}
+                        <p class="text-muted">Does Not Include Bye Week (Week {{ bye_week }})</p>
+                    {% endif %}
                     <canvas id="totalPointsChart" width="1000" height="400"></canvas>
                 </div>
             </div>
