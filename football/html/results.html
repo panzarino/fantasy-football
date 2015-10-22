@@ -26,12 +26,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    Total Stats:<br>
-                    {% for stat, val in total_stats.items %}
-                        {{ stat }}: 
-                        {{ val }}
-                        <br>
-                    {% endfor %}
+                    <h3>Total Points by Week</h3>
+                    <canvas id="totalPointsChart" width="1000" height="400"></canvas>
                 </div>
             </div>
         </div>
@@ -40,4 +36,23 @@
 {% endblock %}
 {% block scriptarea %}
     <script src="{% static 'external/js/Chart.min.js' %}"></script>
+    <script>
+        var data = {
+            labels: [{% for week, val in total_points.items %}"{{ week }}"{% if not forloop.last %}, {% endif %}{% endfor %}],
+            datasets: [
+                {
+                    label: "Overall Points",
+                    fillColor: "rgba(0,90,160,0.2)",
+                    strokeColor: "rgba(0,90,160,1)",
+                    pointColor: "rgba(0,90,160,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: [{% for week, val in total_points.items %}{{ val }}{% if not forloop.last %}, {% endif %}{% endfor %}]
+                }
+            ]
+        }
+        var ctx = document.getElementById("totalPointsChart").getContext("2d");
+        var totalPointsChart = new Chart(ctx).Line(data, {responsive: true, scaleBeginAtZero: true});
+    </script>
 {% endblock %}

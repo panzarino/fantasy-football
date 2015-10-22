@@ -11,7 +11,7 @@ def get_stats(name, year, wks):
     byeweek = schedule.bye_week(player.team, year)
     player_stats = {}
     for x in range(0, len(wks)):
-        dictprop = 'week_'+str(wks[x])
+        dictprop = 'Week '+str(wks[x])
         player_stats[dictprop]=(stats.player_stats(name, year, wks[x]))
         player_stats[dictprop]['week']=wks[x]
         if wks[x] == byeweek:

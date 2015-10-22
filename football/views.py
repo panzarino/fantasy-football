@@ -3,6 +3,7 @@ from django.http import Http404
 from football import points, stats, schedule
 import nflgame # https://github.com/BurntSushi/nflgame/
 from datetime import date
+from collections import OrderedDict
 
 def index(request):
     return render(request, 'index.html')
@@ -32,8 +33,10 @@ def results(request):
         return render(request, 'results.html', {'error':True, 'title':"Error"})
     if results == False:
         return render(request, 'results.html', {'error':True, 'title':"Error"})
+    total_points = points.total_points(results);
+    ordered_total_points = OrderedDict(sorted(total_points.items()))
     total_stats = stats.total_stats(name, year, week);
-    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':total_stats, 'results':results, 'scoring':scoring})
+    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':total_stats, 'results':results, 'scoring':scoring, 'total_points':ordered_total_points})
 
 def scoreboard(request):
     current_week = schedule.current_week()
