@@ -29,6 +29,10 @@ def results(request):
         results = points.standard_ppr_player_points(name, year, weeks)
     elif scoring == 'decimal_ppr':
         results = points.decimal_ppr_player_points(name, year, weeks)
+    elif scoring == 'standard_half_ppr':
+        results = points.standard_half_ppr_player_points(name, year, weeks)
+    elif scoring == 'decimal_half_ppr':
+        results = points.decimal_half_ppr_player_points(name, year, weeks)
     else:
         return render(request, 'results.html', {'error':True, 'title':"Error"})
     if results == False:
