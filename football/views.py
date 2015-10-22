@@ -33,7 +33,7 @@ def results(request):
     if results == False:
         return render(request, 'results.html', {'error':True, 'title':"Error"})
     total_stats = stats.total_stats(name, year, week);
-    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':total_stats, 'results':results})
+    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':total_stats, 'results':results, 'scoring':scoring})
 
 def scoreboard(request):
     current_week = schedule.current_week()

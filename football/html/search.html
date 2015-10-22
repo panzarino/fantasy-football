@@ -60,5 +60,32 @@
 {% block body %}
 {% endblock %}
 {% block scriptarea %}
-    <script src="{% static 'js/form.js' %}"></script>
+    <script>
+        $("#searchform").submit(function(event) {
+            
+            // stop form from submitting normally
+            event.preventDefault();
+
+            // get form data
+            var $form = $( this );
+            var url = $form.attr( "action" );
+            // before send
+            $("body").addClass("loading");
+            
+            var searchdata = $( "#searchform" ).serialize();
+            // Send the data using get
+            var posting = $.get(url , searchdata);
+
+            /* Alerts the results */
+            posting.done(function( data ) {
+                // replace page content
+                $("body").removeClass("loading");
+                document.write(data)
+                // change url
+                var url = "/search/results/?"+searchdata;
+                window.history.pushState({},"Results", url);
+            });
+
+        });
+    </script>
 {% endblock %}
