@@ -134,3 +134,19 @@ def total_points(points):
                 total+=points[x][i]
         total_points[x]=total
     return total_points
+
+def total_points_no_bye(points):
+    # accepts dictionary of single game points
+    # removes bye week from output
+    total_points = {}
+    for x in points:
+        if points[x]['bye_week'] != True:
+            total_points[x]={}
+    for x in points:
+        if points[x]['bye_week'] != True:
+            total = 0
+            for i in points[x]:
+                if i != "bye_week":
+                    total+=points[x][i]
+            total_points[x]=total
+    return total_points

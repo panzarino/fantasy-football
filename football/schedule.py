@@ -17,6 +17,27 @@ def bye_week(team, year):
             return x
     return None
 
+def bye_week_player(name, year):
+    # takes team symbol (3 letters) and year of bye week
+    # returns bye week, 0 if no result, does not work for bye weeks that have not yet happened
+    playerlist = nflgame.find(name, team=None)
+    if playerlist == []:
+        return False
+    player = playerlist[0]
+    team = player.team
+    gameweeks = []
+    for x in range(1, 18):
+        games = nflgame.games(year, week=x, home=None, away=None, kind='REG', started=False)
+        if games == []:
+            return None
+        weekteams = []
+        for i in games:
+            weekteams.append(i.home)
+            weekteams.append(i.away)
+        if team not in weekteams and weekteams!=[]:
+            return x
+    return None
+
 def current_week():
     # returns current week of season
     year = date.today().year
