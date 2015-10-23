@@ -80,9 +80,14 @@ def d_stats(team_symbol, year, wk):
             stats['passing_tds_allowed']+=p.passing_tds
             stats['passing_ints']+=p.passing_ints
             stats['fumbles_forced']+=p.fumbles_tot
-    for p in gameplayers.receiving().sort('receiving_yds').limit(3):
-        if p.team != team_symbol:
-            stats['top_rec_performances'][p.name]={}
-            stats['top_rec_performances'][p.name]['receiving_yds']=p.receiving_yds
-            stats['top_rec_performances'][p.name]['receiving_tds']=p.receiving_tds
+    numrec = 0
+    for p in gameplayers.receiving().sort('receiving_yds'):
+        if numrec <= 1:
+            if p.team != team_symbol:
+                stats['top_rec_performances'][p.name]={}
+                stats['top_rec_performances'][p.name]['receiving_yds']=p.receiving_yds
+                stats['top_rec_performances'][p.name]['receiving_tds']=p.receiving_tds
+                numrec+=1
+        else:
+            break
     return stats
