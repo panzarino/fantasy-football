@@ -91,3 +91,10 @@ def d_stats(team_symbol, year, wk):
         else:
             break
     return stats
+
+def player_position(name):
+    playerlist = nflgame.find(name, team=None)
+    if playerlist == []:
+        return False
+    player = playerlist[0]
+    return player.position
