@@ -38,13 +38,24 @@ def results(request):
     if results == False:
         return render(request, 'results.html', {'error':True, 'title':"Error"})
     position = stats.player_position(name)
+    qb = False
+    flex = False
+    k = False
+    if position == "QB":
+        qb = True
+    elif position == "K":
+        k = True
+    elif position == "WR" or position == "RB" or position == "TE":
+        flex = True
+    else:
+        return render(request, 'results.html', {'error':True, 'title':"Error"})
     bye_week = schedule.bye_week_player(name, year)
     total_points = points.total_points(results);
     graph_total_points = points.total_points_no_bye(results)
     ordered_total_points = OrderedDict(sorted(total_points.items()))
     graph_ordered_total_points = OrderedDict(sorted(graph_total_points.items()))
     total_stats = stats.total_stats(name, year, week);
-    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':total_stats, 'results':results, 'scoring':scoring, 'graph_ordered_total_points':graph_ordered_total_points, 'bye_week':bye_week, 'position':position})
+    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':total_stats, 'results':results, 'scoring':scoring, 'graph_ordered_total_points':graph_ordered_total_points, 'bye_week':bye_week, 'position':position, 'qb':qb, 'flex':flex, 'k':k})
 
 def scoreboard(request):
     current_week = schedule.current_week()
