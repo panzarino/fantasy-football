@@ -40,7 +40,6 @@ def results(request):
     bye_week = schedule.bye_week_player(name, year)
     total_points = points.total_points(results);
     graph_total_points = points.total_points_no_bye(results)
-    print graph_total_points
     ordered_total_points = OrderedDict(sorted(total_points.items()))
     graph_ordered_total_points = OrderedDict(sorted(graph_total_points.items()))
     total_stats = stats.total_stats(name, year, week);
