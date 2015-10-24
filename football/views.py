@@ -119,3 +119,19 @@ def new_team(request):
     else:
         teamnum = numteams+1
     return render(request, 'new_team.html', {'title':'Create a New Team', 'teamnum':teamnum})
+
+def team_list(request):
+    numteams = request.COOKIES.get('teams', None)
+    if numteams == None:
+        return redirect('/team/new/')
+    try:
+        numteams = int(numteams)
+    except ValueError:
+        raise Http404()
+    names = []
+    for x in range(0, numteams):
+        cookiename = "teamname"+str((x+1))
+        name = request.COOKIES.get(cookiename, None)
+        name = name.replace("_", " ")
+        names.append(name)
+    return render(request, 'my_teams.html', {'title':'My Teams', 'teamnames':names})

@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^scoreboard/(\d{1,2})/$', views.previous_scoreboard),
     url(r'^team/(\d{1})/$', views.team),
     url(r'^team/new/$', views.new_team),
+    url(r'^team/all/$', views.team_list),
     
     # url(r'^admin/', include(admin.site.urls)),
 )

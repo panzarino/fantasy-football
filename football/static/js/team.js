@@ -28,8 +28,8 @@ $("#teamform").submit(function(event) {
     var cookiename = "team"+teamnum;
     // set cookie
     setCookie(cookiename, teamdata, 360);
-    var teamname = $("#teamname").val();
-    var teamnamecookiename = "teamname"+teamnum
+    var teamname = $("#teamname").val().replace(/ /g,"_");;
+    var teamnamecookiename = "teamname"+teamnum;
     setCookie(teamnamecookiename, teamname, 360);
     setCookie("teams", teamnum, 360);
     var url = "/team/"+teamnum;
