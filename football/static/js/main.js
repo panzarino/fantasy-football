@@ -19,8 +19,10 @@ $(document).ready(function(){
             var teamnum = x+1;
             var cookiename = "teamname"+teamnum;
             var teamname = getCookie(cookiename);
-            var str = '<li>\n<a href="/teams/'+teamnum+'/" onclick = $("#menu-close").click(); >'+teamname+'</a>\n</li>';
+            var str = '<li>\n<a href="/team/'+teamnum+'/" onclick = $("#menu-close").click(); >'+teamname+'</a>\n</li>';
             $("#sidebar-ul").append(str);
+            var bartext = '<li>\n<a href="/team/new" onclick = $("#menu-close").click(); >Create a New Team</a>\n</li>\n<li>\n<a href="https://github.com/zachpanz88/fantasy-football" onclick = $("#menu-close").click(); >Website Source Code</a>\n</li>'
+            $("#sidebar-ul").append(bartext);
         }
     }
 })

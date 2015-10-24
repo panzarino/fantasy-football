@@ -99,7 +99,7 @@ def team(request, offset):
         team = int(offset)
     except ValueError:
         raise Http404()
-    if team < 0 or team > 2 or numteams < 0 or numteams > 2:
+    if team < 1 or team > 3 or numteams < 1 or numteams > 3:
         raise Http404()
     return render(request, 'team.html', {'team':team})
 
@@ -110,9 +110,9 @@ def new_team(request):
             numteams = int(numteams)
         except ValueError:
             raise Http404()
-        if numteams < 0 or numteams > 2:
+        if numteams < 1 or numteams > 3:
             raise Http404()
-        if numteams == 2:
+        if numteams == 3:
             return render(request, 'new_team.html', {'toomany':True, 'title':'Error'})
     if numteams == None:
         teamnum = 1
