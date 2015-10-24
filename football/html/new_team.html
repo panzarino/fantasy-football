@@ -1,0 +1,133 @@
+{% extends 'external/main.html' %}
+
+{% block title %}{{ title }} | Fantasy Football Predictor{% endblock %}
+
+{% load staticfiles %}
+{% block cssarea %}
+    <link href="{% static 'css/loading.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<!-- Placeholder for now -->
+<aside class="call-to-action bg-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Create a New Team</h1>
+            </div>
+        </div>
+    </div>
+</aside>
+{% if toomany %}
+    <aside class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>You already have 3 teams, you cannot create any more!</h2>
+                    <h3>Click <a href="/">here</a> to return home</h3>
+                </div>
+            </div>
+        </div>
+    </aside>
+{% else %}
+    <aside class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <form class="form-inline" id="teamform">
+                        <div class="form-group">
+                            <h3 for="team_name">Team Name</h3>
+                            <input type="text" class="form-control" id="teamname" name="teamname" placeholder="Team Name" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <h3>Scoring Type</h3>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="standard" value="standard" required> Standard
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="decimal" value="decimal" required> Decimal
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="standard_ppr" value="standard_ppr" required> Standard PPR
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="decimal_ppr" value="decimal_ppr" required> Decimal PPR
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="standard_half_ppr" value="standard_half_ppr" required> Standard Half PPR
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="decimal_half_ppr" value="decimal_half_ppr" required> Decimal Half PPR
+                            </label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <h3>Players</h3>
+                            <p class="text-muted">Limit of 15 Total Players</p>
+                            <p class="text-muted">This does not create a team in a fantasy football league, it reports stats of a fantasy football team with these players.</p>
+                            <p class="text-muted">Use this to track your real fantasy football team.</p>
+                            <p class="text-muted">D/ST are not accepted.</p>
+                            <p class="text-muted">If you have less than 15 total players, type "empty" as the player name.</p>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player1" name="player1" placeholder="Player 1" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player2" name="player2" placeholder="Player 2" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player3" name="player3" placeholder="Player 3" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player4" name="player4" placeholder="Player 4" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player5" name="player5" placeholder="Player 5" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player6" name="player6" placeholder="Player 6" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player7" name="player7" placeholder="Player 7" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player8" name="player8" placeholder="Player 8" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player9" name="player9" placeholder="Player 9" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player10" name="player10" placeholder="Player 10" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player11" name="player11" placeholder="Player 11" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player12" name="player12" placeholder="Player 12" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player13" name="player13" placeholder="Player 13" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player14" name="player14" placeholder="Player 14" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="player15" name="player15" placeholder="Player 15" required>
+                        </div>
+                        <br>
+                        <br>
+                        <input type="hidden" id="teamnum" name="teamnum" value="{{ teamnum }}"></input>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <div class="modal">
+    </div>
+{% endif %}
+{% endblock %}
+{% block scriptarea %}
+    <script src="{% static 'js/team.js' %}"></script>
+{% endblock %}
