@@ -11,7 +11,7 @@ function getCookie(cname) {
 }
 
 // prints sidebar data
-$(document).ready(function(){
+function sidebar(){
     var numteams = getCookie("teams");
     if (numteams != ""){
         numteams = parseInt(numteams);
@@ -25,4 +25,7 @@ $(document).ready(function(){
             $("#sidebar-ul").append(bartext);
         }
     }
+}
+$(document).ready(function(){
+    sidebar();
 })
