@@ -21,10 +21,7 @@ function getCookie(cname) {
 // sets default scoring when page loads
 $(document).ready(function(){
     var scoring = getCookie("scoring");
-    if (scoring == ""){
-        $('#standard').attr("checked", true);
-    }
-    else{
+    if (scoring != ""){
         var scoring_id = "#"+scoring;
         $(scoring_id).attr("checked", true);
     }
@@ -36,7 +33,7 @@ $("#searchform").submit(function(event) {
     // stop form from submitting normally
     event.preventDefault();
     // get form data
-    var $form = $( this );
+    var $form = $(this);
     var url = $form.attr("action");
     // before send
     $("body").addClass("loading");

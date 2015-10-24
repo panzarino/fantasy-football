@@ -20,6 +20,8 @@
 
     <!-- Custom CSS -->
     <link href="{% static 'external/css/stylish-portfolio.css' %}" rel="stylesheet">
+    {% block cssarea %}
+    {% endblock %}
 
     <!-- Custom Fonts -->
     <link href="{% static 'external/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
@@ -39,7 +41,7 @@
     <!-- Navigation -->
     <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
     <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
+        <ul class="sidebar-nav" id="sidebar-ul">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
                 <a href="/"  onclick = $("#menu-close").click(); >FF Predictor</a>
@@ -48,14 +50,18 @@
                 <a href="/" onclick = $("#menu-close").click(); >Home</a>
             </li>
             <li>
-                <a href="/search" onclick = $("#menu-close").click(); >Search</a>
+                <a href="/search/" onclick = $("#menu-close").click(); >Search for a Player</a>
             </li>
             <li>
-                <a href="/scoreboard" onclick = $("#menu-close").click(); >Scoreboard</a>
+                <a href="/scoreboard/" onclick = $("#menu-close").click(); >Scoreboard</a>
+            </li>
+            <li>
+                <a href="/team/new" onclick = $("#menu-close").click(); >Create a New Team</a>
             </li>
             <li>
                 <a href="https://github.com/zachpanz88/fantasy-football" onclick = $("#menu-close").click(); >Website Source Code</a>
             </li>
+        </ul>
     </nav>
     
     {% block header %}
@@ -86,6 +92,7 @@
     <script src="{% static 'external/js/bootstrap.min.js' %}"></script>
 
     <!-- Custom JavaScript -->
+    <script src="{% static 'js/main.js' %}"></script>
     <script>
     // Closes the sidebar menu
     $("#menu-close").click(function(e) {

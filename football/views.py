@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404
 from football import points, stats, schedule
 import nflgame # https://github.com/BurntSushi/nflgame/
@@ -86,3 +86,36 @@ def previous_scoreboard(request, offset):
     for x in range(0,current_week):
         weeks.append(x+1)
     return render(request, 'previous_scoreboard.html', {'scores':scores,'week':wk, 'past_weeks':weeks})
+
+def team(request, offset):
+    numteams = request.COOKIES.get('teams', None)
+    if numteams == None:
+        return redirect('/team/new/')
+    try:
+        numteams = int(numteams)
+    except ValueError:
+        raise Http404()
+    try:
+        team = int(offset)
+    except ValueError:
+        raise Http404()
+    if team < 0 or team > 2 or numteams < 0 or numteams > 2:
+        raise Http404()
+    return render(request, 'team.html', {'team':team})
+
+def new_team(request):
+    numteams = request.COOKIES.get('teams', None)
+    if numteams != None:
+        try:
+            numteams = int(numteams)
+        except ValueError:
+            raise Http404()
+        if numteams < 0 or numteams > 2:
+            raise Http404()
+        if numteams == 2:
+            return render(request, 'new_team.html', {'toomany':True, 'title':'Error'})
+    if numteams == None:
+        teamnum = 1
+    else:
+        teamnum = numteams+1
+    return render(request, 'new_team.html', {'title':'Create a New Team', 'teamnum':teamnum})

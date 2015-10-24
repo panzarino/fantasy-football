@@ -3,66 +3,47 @@
 {% block title %}Search | Fantasy Football Predictor{% endblock %}
 
 {% load staticfiles %}
-    {% block headercontent %}
-        <h1>Search</h1>
-        <h3>Type the full name of the player</h3>
-        <h3 class="text-muted">Ex. "Russell Wilson"</h3>
-        <br>
-        <form action="results" id="searchform">
-            <div class="form-inline">
-            <div class="form-group">
-                <input type="text" class="form-control" id="name" name="name" placeholder="Search" style="min-width: 300px;" required autofocus>
-            </div>
-            <button type="submit" class="btn btn-dark btn-md">Search</button>
-            </div>
-            <br>
-            <div class="form-group">
-                <h4 class="text-muted">Scoring Type</h4>
-                <label class="radio-inline">
-                    <input type="radio" name="scoring" id="standard" value="standard"> Standard
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="scoring" id="decimal" value="decimal"> Decimal
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="scoring" id="standard_ppr" value="standard_ppr"> Standard PPR
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="scoring" id="decimal_ppr" value="decimal_ppr"> Decimal PPR
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="scoring" id="standard_half_ppr" value="standard_half_ppr"> Standard Half PPR
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="scoring" id="decimal_half_ppr" value="decimal_half_ppr"> Decimal Half PPR
-                </label>
-            </div>
-        </form>
-        <br>
-        <div class="modal">
+{% block cssarea %}
+    <link href="{% static 'css/loading.css' %}" rel="stylesheet">
+{% endblock %}
+{% block headercontent %}
+    <h1>Search</h1>
+    <h3>Type the full name of the player</h3>
+    <h3 class="text-muted">Ex. "Russell Wilson"</h3>
+    <br>
+    <form action="results" id="searchform">
+        <div class="form-inline">
+        <div class="form-group">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Search" style="min-width: 300px;" required autofocus>
         </div>
-        <style>
-            .modal {
-                display: none;
-                position: fixed;
-                z-index: 1000;
-                top: 0;
-                left: 0;
-                height: 100%;
-                width: 100%;
-                background: rgba( 255, 255, 255, .8 ) 
-                            url("{% static 'img/loading.gif' %}") 
-                            50% 50% 
-                            no-repeat;
-                }
-            body.loading {
-                overflow: hidden;   
-            }
-            body.loading .modal {
-                display: block;
-            }
-        </style>
-        {% endblock %}
+        <button type="submit" class="btn btn-dark btn-md">Search</button>
+        </div>
+        <br>
+        <div class="form-group">
+            <h4 class="text-muted">Scoring Type</h4>
+            <label class="radio-inline">
+                <input type="radio" name="scoring" id="standard" value="standard" required> Standard
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="scoring" id="decimal" value="decimal" required> Decimal
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="scoring" id="standard_ppr" value="standard_ppr" required> Standard PPR
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="scoring" id="decimal_ppr" value="decimal_ppr" required> Decimal PPR
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="scoring" id="standard_half_ppr" value="standard_half_ppr" required> Standard Half PPR
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="scoring" id="decimal_half_ppr" value="decimal_half_ppr" required> Decimal Half PPR
+            </label>
+        </div>
+    </form>
+    <div class="modal">
+    </div>
+{% endblock %}
 {% block body %}
 {% endblock %}
 {% block scriptarea %}
