@@ -3,6 +3,9 @@
 {% block title %}Search | Fantasy Football Predictor{% endblock %}
 
 {% load staticfiles %}
+{% block cssarea %}
+    <link href="{% static 'css/loading.css' %}" rel="stylesheet">
+{% endblock %}
 {% block headercontent %}
     <h1>Search</h1>
     <h3>Type the full name of the player</h3>
@@ -38,6 +41,7 @@
             </label>
         </div>
     </form>
+    <div class="modal"></div>
 {% endblock %}
 {% block body %}
 {% endblock %}
