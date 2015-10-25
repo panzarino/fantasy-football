@@ -124,20 +124,6 @@
             }
         });
     });
-    $("form").submit(function(e) {
-
-    var ref = $(this).find("[required]");
-
-    $(ref).each(function(){
-        if ( $(this).val() == '' ){
-                alert("Please choose an option.");
-                $(this).focus();
-                e.preventDefault();
-                return false;
-            }
-        });
-        return true;
-    });
     </script>
     {% block scriptarea %}
     {% endblock %}

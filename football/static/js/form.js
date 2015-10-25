@@ -25,6 +25,9 @@ $(document).ready(function(){
         var scoring_id = "#"+scoring;
         $(scoring_id).attr("checked", true);
     }
+    else{
+        $("#standard").attr("checked", true);
+    }
 })
 
 // on form submit
