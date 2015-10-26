@@ -44,7 +44,7 @@ $("#searchform").submit(function(event) {
     // set scoring type cookie
     var scoring = $('input:radio[name=scoring]:checked').val();
     // sets cookie for 1 year
-    setCookie("scoring", scoring, 360);
+    setCookie("scoring", scoring, 180);
     
     // get form data
     var searchdata = $("#searchform").serialize();

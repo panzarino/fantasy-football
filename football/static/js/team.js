@@ -25,13 +25,26 @@ $("#teamform").submit(function(event) {
     $("body").addClass("loading");
     var teamdata = $(this).serialize();
     var teamnum = $("#teamnum").val();
+    // set cookies
+    for (var x=(teamnum-1); x>0; x--){
+        // resets the expiration date so all teams expire at same time
+        var team = "team"+x;
+        var teamdata = getCookie(team);
+        if (teamdata!=""){
+            setCookie(team, teamdata, 180);
+        }
+        var teamname = "teamname"+x;
+        var teamnamedata = getCookie(teamname);
+        if (teamnamedata!=""){
+            setCookie(teamname, teamnamedata, 180);
+        }
+    }
     var cookiename = "team"+teamnum;
-    // set cookie
-    setCookie(cookiename, teamdata, 360);
+    setCookie(cookiename, teamdata, 180);
     var teamname = $("#teamname").val().replace(/ /g,"_");;
     var teamnamecookiename = "teamname"+teamnum;
-    setCookie(teamnamecookiename, teamname, 360);
-    setCookie("teams", teamnum, 360);
+    setCookie(teamnamecookiename, teamname, 180);
+    setCookie("teams", teamnum, 180);
     var url = "/team/"+teamnum;
     window.location.assign(url);
 })
