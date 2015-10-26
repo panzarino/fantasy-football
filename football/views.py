@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
+from django.core import serializers
 from football import points, stats, schedule
 import nflgame # https://github.com/BurntSushi/nflgame/
 from datetime import date
@@ -87,7 +88,7 @@ def previous_scoreboard(request, offset):
         weeks.append(x+1)
     return render(request, 'previous_scoreboard.html', {'scores':scores,'week':wk, 'past_weeks':weeks})
 
-def team(request, offset):
+def teamnum(request, offset):
     numteams = request.COOKIES.get('teams', None)
     if numteams == None:
         return redirect('/team/new/')
@@ -101,7 +102,14 @@ def team(request, offset):
         raise Http404()
     if team < 1 or team > 3 or numteams < 1 or numteams > 3:
         raise Http404()
-    return render(request, 'team.html', {'team':team})
+    teamcookiename = "team"+str(team)
+    teamdata = request.COOKIES.get(teamcookiename, None)
+    url = "/team/?"+teamdata
+    return redirect(url)
+
+def team(request):
+    teamname = request.GET['teamname']
+    return render(request, "team.html", {'title':teamname, 'teamname':teamname})
 
 def new_team(request):
     numteams = request.COOKIES.get('teams', None)

@@ -5,12 +5,11 @@
 {% load staticfiles %}
 
 {% block body %}
-<!-- Placeholder for now -->
 <aside class="call-to-action bg-primary">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>{{ name }} ({{ position }})</h1>
+                <h1>{{ teamname }}</h1>
             </div>
         </div>
     </div>
@@ -21,7 +20,6 @@
             <div class="col-lg-12 text-center">
                 <h3>Total Points by Week</h3>
                 <p class="text-muted">Does Not Include Bye Week</p>
-                <canvas id="totalPointsChart" width="1000" height="400"></canvas>
             </div>
         </div>
     </div>
