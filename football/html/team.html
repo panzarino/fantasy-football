@@ -25,6 +25,7 @@
                       <th class="text-center">Player</th>
                       <th class="text-center">Position</th>
                       <th class="text-center">Points</th>
+                      <th class="text-center">Full Details</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -33,6 +34,7 @@
                         <td>{{ name }}</td>
                         <td>QB</td>
                         <td id="points{{ forloop.counter }}" class="qb-points"></td>
+                        <td><a href="/search/results/?name={{ name }}&scoring={{ scoring }}" class="loading-link">More Details</a></td>
                       </tr>
                     {% endfor %}
                     {% for name in rb %}
@@ -40,6 +42,7 @@
                         <td>{{ name }}</td>
                         <td>RB</td>
                         <td id="points{{ forloop.counter }}" class="rb-points"></td>
+                        <td><a href="/search/results/?name={{ name }}&scoring={{ scoring }}" class="loading-link">More Details</a></td>
                       </tr>
                     {% endfor %}
                     {% for name in wr %}
@@ -47,6 +50,7 @@
                         <td>{{ name }}</td>
                         <td>WR</td>
                         <td id="points{{ forloop.counter }}" class="wr-points"></td>
+                        <td><a href="/search/results/?name={{ name }}&scoring={{ scoring }}" class="loading-link">More Details</a></td>
                       </tr>
                     {% endfor %}
                     {% for name in te %}
@@ -54,6 +58,7 @@
                         <td>{{ name }}</td>
                         <td>TE</td>
                         <td id="points{{ forloop.counter }}" class="te-points"></td>
+                        <td><a href="/search/results/?name={{ name }}&scoring={{ scoring }}" class="loading-link">More Details</a></td>
                       </tr>
                     {% endfor %}
                     {% for name in k %}
@@ -61,13 +66,15 @@
                         <td>{{ name }}</td>
                         <td>K</td>
                         <td id="points{{ forloop.counter }}" class="k-points"></td>
+                        <td><a href="/search/results/??name={{ name }}&scoring={{ scoring }}" class="loading-link">More Details</a></td>
                       </tr>
                     {% endfor %}
                     {% for name in other %}
                       <tr>
                         <td>{{ name }}</td>
-                        <td>None</td>
-                        <td>0</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
                       </tr>
                     {% endfor %}
                   </tbody>

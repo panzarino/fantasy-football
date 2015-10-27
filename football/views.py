@@ -139,7 +139,7 @@ def team(request):
                 none.append(x)
     scoring = request.GET['scoring']
     current_week = schedule.current_week()
-    return render(request, "team.html", {'title':teamname, 'teamname':teamname, 'qb':qb, 'rb':rb, 'wr':wr, 'te':te, 'k':k, 'other':none})
+    return render(request, "team.html", {'title':teamname, 'teamname':teamname, 'qb':qb, 'rb':rb, 'wr':wr, 'te':te, 'k':k, 'other':none, 'scoring':scoring})
 
 def new_team(request):
     numteams = request.COOKIES.get('teams', None)

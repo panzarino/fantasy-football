@@ -20,6 +20,7 @@
 
     <!-- Custom CSS -->
     <link href="{% static 'external/css/stylish-portfolio.css' %}" rel="stylesheet">
+    <link href="{% static 'css/loading.css' %}" rel="stylesheet">
     {% block cssarea %}
     {% endblock %}
 
@@ -53,7 +54,7 @@
                 <a href="/search/" onclick = $("#menu-close").click(); >Search for a Player</a>
             </li>
             <li>
-                <a href="/scoreboard/" onclick = $("#menu-close").click(); >Scoreboard</a>
+                <a href="/scoreboard/" onclick = $("#menu-close").click(); class="loading-link">Scoreboard</a>
             </li>
             <li>
                 <a href="/team/all/" onclick = $("#menu-close").click(); >My Teams</a>
@@ -87,7 +88,10 @@
             </div>
         </div>
     </footer>
-
+    
+    <!-- Loading icon div -->
+    <div class="modal"></div>
+    
     <!-- jQuery -->
     <script src="{% static 'external/js/jquery.js' %}"></script>
 
@@ -95,6 +99,7 @@
     <script src="{% static 'external/js/bootstrap.min.js' %}"></script>
 
     <!-- Custom JavaScript -->
+    <script src="{% static 'js/link.js' %}"></script>
     <script>
     // Closes the sidebar menu
     $("#menu-close").click(function(e) {

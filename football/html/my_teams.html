@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 {% for name in teamnames %}
-                    <h3><a href="/team/{{ forloop.counter }}/" class="team-link">{{ name }}</a></h3>
+                    <h3><a href="/team/{{ forloop.counter }}/" class="team-link loading-link">{{ name }}</a></h3>
                 {% endfor %}
                 <h3><a href="/team/new/">Create a New Team</a></h3>
             </div>

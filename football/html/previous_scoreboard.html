@@ -26,9 +26,9 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdown">
                         {% for wk in past_weeks reversed %}
                             {% if forloop.first %}
-                                <li><a href="/scoreboard/">Current Scoreboard (Week {{ wk }})</a></li>
+                                <li><a href="/scoreboard/" class="loading-link">Current Scoreboard (Week {{ wk }})</a></li>
                             {% else %}
-                                <li><a href="/scoreboard/{{ wk }}/">Week {{ wk }}</a></li>
+                                <li><a href="/scoreboard/{{ wk }}/" class="loading-link">Week {{ wk }}</a></li>
                             {% endif %}
                         {% endfor %}
                     </ul>
