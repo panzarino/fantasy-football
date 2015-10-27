@@ -5,6 +5,7 @@ from football import points, stats, schedule
 import nflgame # https://github.com/BurntSushi/nflgame/
 from datetime import date
 from collections import OrderedDict
+from string import capwords
 
 def index(request):
     return render(request, 'index.html')
@@ -15,7 +16,7 @@ def search(request):
 def results(request):
     if 'name' not in request.GET or 'scoring' not in request.GET:
         return render(request, 'results.html', {'error':True, 'title':"Error"})
-    name = request.GET['name']
+    name = capwords(request.GET['name'])
     scoring = request.GET['scoring']
     year = date.today().year
     week = schedule.current_week()
@@ -136,7 +137,9 @@ def team(request):
                 k.append(x)
             else:
                 none.append(x)
-    return render(request, "team.html", {'title':teamname, 'teamname':teamname})
+    scoring = request.GET['scoring']
+    current_week = schedule.current_week()
+    return render(request, "team.html", {'title':teamname, 'teamname':teamname, 'qb':qb, 'rb':rb, 'wr':wr, 'te':te, 'k':k, 'other':none})
 
 def new_team(request):
     numteams = request.COOKIES.get('teams', None)
