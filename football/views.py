@@ -109,6 +109,33 @@ def teamnum(request, offset):
 
 def team(request):
     teamname = request.GET['teamname']
+    teamplayers = []
+    for x in range(1,16):
+        dataname = "player"+str(x)
+        teamplayers.append(request.GET[dataname])
+    qb = []
+    rb = []
+    wr = []
+    te = []
+    k = []
+    none = []
+    for x in teamplayers:
+        if x == 'empty':
+            none.append(x)
+        else:
+            playerposition = stats.player_position(x)
+            if playerposition == "QB":
+                qb.append(x)
+            elif playerposition == "RB":
+                rb.append(x)
+            elif playerposition == "WR":
+                wr.append(x)
+            elif playerposition == "TE":
+                te.append(x)
+            elif playerposition == "K":
+                k.append(x)
+            else:
+                none.append(x)
     return render(request, "team.html", {'title':teamname, 'teamname':teamname})
 
 def new_team(request):
