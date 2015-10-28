@@ -41,6 +41,8 @@ def results(request):
             return render(request, 'results.html', {'error':True, 'title':"Error"})
     elif position == "K":
         results = points.k_points(name, year, weeks)
+    else:
+        results = False
     if results == False:
         return render(request, 'results.html', {'error':True, 'title':"Error"})
     position = stats.player_position(name)
