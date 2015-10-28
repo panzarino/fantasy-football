@@ -21,30 +21,43 @@ function getCookie(cname) {
 $("#teamform").submit(function(event) {
     // stop form from submitting normally
     event.preventDefault();
-    // get form data
-    $("body").addClass("loading");
-    var teamdata = $(this).serialize();
-    var teamnum = $("#teamnum").val();
-    // set cookies
-    for (var x=(teamnum-1); x>0; x--){
-        // resets the expiration date so all teams expire at same time
-        var team = "team"+x;
-        var resetteamdata = getCookie(team);
-        if (resetteamdata!=""){
-            setCookie(team, resetteamdata, 180);
+    // verification for browsers like safari
+    var ref = $(this).find("[required]");
+    var good = true;
+    $(ref).each(function(){
+        if ($(this).val() == '')
+        {
+            alert("Not all fields are filled out!");
+            good = false;
+            return false;
         }
-        var teamname = "teamname"+x;
-        var teamnamedata = getCookie(teamname);
-        if (teamnamedata!=""){
-            setCookie(teamname, teamnamedata, 180);
+    });
+    if (good == true){
+        // get form data
+        $("body").addClass("loading");
+        var teamdata = $(this).serialize();
+        var teamnum = $("#teamnum").val();
+        // set cookies
+        for (var x=(teamnum-1); x>0; x--){
+            // resets the expiration date so all teams expire at same time
+            var team = "team"+x;
+            var resetteamdata = getCookie(team);
+            if (resetteamdata!=""){
+                setCookie(team, resetteamdata, 180);
+            }
+            var teamname = "teamname"+x;
+            var teamnamedata = getCookie(teamname);
+            if (teamnamedata!=""){
+                setCookie(teamname, teamnamedata, 180);
+            }
         }
+        var cookiename = "team"+teamnum;
+        setCookie(cookiename, teamdata, 180);
+        var teamname = $("#teamname").val().replace(/ /g,"_");;
+        var teamnamecookiename = "teamname"+teamnum;
+        setCookie(teamnamecookiename, teamname, 180);
+        setCookie("teams", teamnum, 180);
+        var url = "/team/"+teamnum;
+        window.location.assign(url);
     }
-    var cookiename = "team"+teamnum;
-    setCookie(cookiename, teamdata, 180);
-    var teamname = $("#teamname").val().replace(/ /g,"_");;
-    var teamnamecookiename = "teamname"+teamnum;
-    setCookie(teamnamecookiename, teamname, 180);
-    setCookie("teams", teamnum, 180);
-    var url = "/team/"+teamnum;
-    window.location.assign(url);
 })
