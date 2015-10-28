@@ -29,9 +29,9 @@ $("#teamform").submit(function(event) {
     for (var x=(teamnum-1); x>0; x--){
         // resets the expiration date so all teams expire at same time
         var team = "team"+x;
-        var teamdata = getCookie(team);
-        if (teamdata!=""){
-            setCookie(team, teamdata, 180);
+        var resetteamdata = getCookie(team);
+        if (resetteamdata!=""){
+            setCookie(team, resetteamdata, 180);
         }
         var teamname = "teamname"+x;
         var teamnamedata = getCookie(teamname);
