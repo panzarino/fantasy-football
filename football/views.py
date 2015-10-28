@@ -23,20 +23,24 @@ def results(request):
     weeks = []
     for x in range(1,week+1):
         weeks.append(x)
-    if scoring == 'standard':
-        results = points.standard_player_points(name, year, weeks)
-    elif scoring == 'decimal':
-        results = points.decimal_player_points(name, year, weeks)
-    elif scoring == 'standard_ppr':
-        results = points.standard_ppr_player_points(name, year, weeks)
-    elif scoring == 'decimal_ppr':
-        results = points.decimal_ppr_player_points(name, year, weeks)
-    elif scoring == 'standard_half_ppr':
-        results = points.standard_half_ppr_player_points(name, year, weeks)
-    elif scoring == 'decimal_half_ppr':
-        results = points.decimal_half_ppr_player_points(name, year, weeks)
-    else:
-        return render(request, 'results.html', {'error':True, 'title':"Error"})
+    position = stats.player_position(name)
+    if position == "QB" or position == "RB" or position == "WR" or position == "TE":
+        if scoring == 'standard':
+            results = points.standard_player_points(name, year, weeks)
+        elif scoring == 'decimal':
+            results = points.decimal_player_points(name, year, weeks)
+        elif scoring == 'standard_ppr':
+            results = points.standard_ppr_player_points(name, year, weeks)
+        elif scoring == 'decimal_ppr':
+            results = points.decimal_ppr_player_points(name, year, weeks)
+        elif scoring == 'standard_half_ppr':
+            results = points.standard_half_ppr_player_points(name, year, weeks)
+        elif scoring == 'decimal_half_ppr':
+            results = points.decimal_half_ppr_player_points(name, year, weeks)
+        else:
+            return render(request, 'results.html', {'error':True, 'title':"Error"})
+    elif position == "K":
+        results = points.k_points(name, year, weeks)
     if results == False:
         return render(request, 'results.html', {'error':True, 'title':"Error"})
     position = stats.player_position(name)
@@ -177,13 +181,17 @@ def player_points(request):
     scoring = request.GET['scoring']
     name = request.GET['name']
     position = request.GET['position']
-    functionname = scoring+"_player_points"
-    getpoints = getattr(points, functionname)
     year = date.today().year
     current_week = schedule.current_week()
     dictkey = "Week "+str(current_week)
     current_week = [current_week]
     if position == "QB" or position == "RB" or position == "WR" or position == "TE":
+        functionname = scoring+"_player_points"
+        getpoints = getattr(points, functionname)
         pts = getpoints(name, year, current_week)
         total_points = points.total_points(pts)[dictkey]
-    return HttpResponse(total_points)
+        return HttpResponse(total_points)
+    if position == "K":
+        pts = points.k_points(name, year, current_week)
+        total_points = points.total_points(pts)[dictkey]
+        return HttpResponse(total_points)

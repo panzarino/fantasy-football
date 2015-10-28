@@ -174,6 +174,22 @@ def decimal_half_ppr_player_points(name, year, wks):
         points[x]['receptions']=player_stats[x]['receptions']*(.5)
     return points
 
+def k_points(name, year, wks):
+    # returns standard points for kickers
+    player_stats = get_stats(name, year, wks)
+    if player_stats == False:
+        return False
+    points = {}
+    for x in player_stats:
+        points[x]={}
+    for x in player_stats:
+        points[x]['fgmade']=float(player_stats[x]['fgmade']*3)
+        points[x]['xpmade']=player_stats[x]['xpmade']
+        fgmissed = player_stats[x]['fga']-player_stats[x]['fgmade']
+        points[x]['fgmissed']=fgmissed*(-1)
+        points[x]['bye_week']=player_stats[x]['bye_week']
+    return points
+
 def total_points(points):
     # accepts dictionary of single game points
     total_points = {}
