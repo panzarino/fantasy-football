@@ -14,6 +14,7 @@
         </div>
     </div>
 </aside>
+<i id="scoring" style="display: none;">{{ scoring }}</i>
 <aside class="about">
     <div class="container">
         <div class="row">
@@ -31,42 +32,42 @@
                   <tbody>
                     {% for name in qb %}
                       <tr>
-                        <td>{{ name }}</td>
+                        <td id="qbname{{ forloop.counter }}">{{ name }}</td>
                         <td>QB</td>
-                        <td id="points{{ forloop.counter }}" class="qb-points"></td>
+                        <td id="qbpoints{{ forloop.counter }}" class="qb-points points"></td>
                         <td><a href="/search/results/?name={{ name }}&scoring={{ scoring }}" class="loading-link">More Details</a></td>
                       </tr>
                     {% endfor %}
                     {% for name in rb %}
                       <tr>
-                        <td>{{ name }}</td>
+                        <td id="rbname{{ forloop.counter }}">{{ name }}</td>
                         <td>RB</td>
-                        <td id="points{{ forloop.counter }}" class="rb-points"></td>
+                        <td id="rbpoints{{ forloop.counter }}" class="rb-points points"></td>
                         <td><a href="/search/results/?name={{ name }}&scoring={{ scoring }}" class="loading-link">More Details</a></td>
                       </tr>
                     {% endfor %}
                     {% for name in wr %}
                       <tr>
-                        <td>{{ name }}</td>
+                        <td id="wrname{{ forloop.counter }}">{{ name }}</td>
                         <td>WR</td>
-                        <td id="points{{ forloop.counter }}" class="wr-points"></td>
+                        <td id="wrpoints{{ forloop.counter }}" class="wr-points points"></td>
                         <td><a href="/search/results/?name={{ name }}&scoring={{ scoring }}" class="loading-link">More Details</a></td>
                       </tr>
                     {% endfor %}
                     {% for name in te %}
                       <tr>
-                        <td>{{ name }}</td>
+                        <td id="tename{{ forloop.counter }}">{{ name }}</td>
                         <td>TE</td>
-                        <td id="points{{ forloop.counter }}" class="te-points"></td>
+                        <td id="tepoints{{ forloop.counter }}" class="te-points points"></td>
                         <td><a href="/search/results/?name={{ name }}&scoring={{ scoring }}" class="loading-link">More Details</a></td>
                       </tr>
                     {% endfor %}
                     {% for name in k %}
                       <tr>
-                        <td>{{ name }}</td>
+                        <td id="kname{{ forloop.counter }}">{{ name }}</td>
                         <td>K</td>
-                        <td id="points{{ forloop.counter }}" class="k-points"></td>
-                        <td><a href="/search/results/??name={{ name }}&scoring={{ scoring }}" class="loading-link">More Details</a></td>
+                        <td id="kpoints{{ forloop.counter }}" class="k-points points"></td>
+                        <td><a href="/search/results/?name={{ name }}&scoring={{ scoring }}" class="loading-link">More Details</a></td>
                       </tr>
                     {% endfor %}
                     {% for name in other %}
@@ -86,4 +87,5 @@
 </aside>
 {% endblock %}
 {% block scriptarea %}
+<script src="{% static 'js/points.js' %}"></script>
 {% endblock %}

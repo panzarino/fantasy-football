@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.core import serializers
 from football import points, stats, schedule
 import nflgame # https://github.com/BurntSushi/nflgame/
@@ -138,7 +138,6 @@ def team(request):
             else:
                 none.append(x)
     scoring = request.GET['scoring']
-    current_week = schedule.current_week()
     return render(request, "team.html", {'title':teamname, 'teamname':teamname, 'qb':qb, 'rb':rb, 'wr':wr, 'te':te, 'k':k, 'other':none, 'scoring':scoring})
 
 def new_team(request):
@@ -173,3 +172,18 @@ def team_list(request):
         name = name.replace("_", " ")
         names.append(name)
     return render(request, 'my_teams.html', {'title':'My Teams', 'teamnames':names})
+
+def player_points(request):
+    scoring = request.GET['scoring']
+    name = request.GET['name']
+    position = request.GET['position']
+    functionname = scoring+"_player_points"
+    getpoints = getattr(points, functionname)
+    year = date.today().year
+    current_week = schedule.current_week()
+    dictkey = "Week "+str(current_week)
+    current_week = [current_week]
+    if position == "QB" or position == "RB" or position == "WR" or position == "TE":
+        pts = getpoints(name, year, current_week)
+        total_points = points.total_points(pts)[dictkey]
+    return HttpResponse(total_points)

@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^team/$', views.team),
     url(r'^team/new/$', views.new_team),
     url(r'^team/all/$', views.team_list),
+    url(r'^points/$', views.player_points),
     
     # url(r'^admin/', include(admin.site.urls)),
 )
