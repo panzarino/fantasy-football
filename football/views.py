@@ -116,6 +116,7 @@ def teamnum(request, offset):
 
 def team(request):
     teamname = request.GET['teamname']
+    teamnum = request.GET['teamnum']
     teamplayers = []
     for x in range(1,16):
         dataname = "player"+str(x)
@@ -144,7 +145,7 @@ def team(request):
             else:
                 none.append(x)
     scoring = request.GET['scoring']
-    return render(request, "team.html", {'title':teamname, 'teamname':teamname, 'qb':qb, 'rb':rb, 'wr':wr, 'te':te, 'k':k, 'other':none, 'scoring':scoring})
+    return render(request, "team.html", {'title':teamname, 'teamnum':teamnum, 'teamname':teamname, 'qb':qb, 'rb':rb, 'wr':wr, 'te':te, 'k':k, 'other':none, 'scoring':scoring})
 
 def new_team(request):
     numteams = request.COOKIES.get('teams', None)
@@ -178,6 +179,37 @@ def team_list(request):
         name = name.replace("_", " ")
         names.append(name)
     return render(request, 'my_teams.html', {'title':'My Teams', 'teamnames':names})
+
+def edit_team(request, offset):
+    numteams = request.COOKIES.get('teams', None)
+    if numteams == None:
+        return redirect('/team/new/')
+    try:
+        numteams = int(numteams)
+    except ValueError:
+        raise Http404()
+    try:
+        team = int(offset)
+    except ValueError:
+        raise Http404()
+    if team < 1 or team > 3 or numteams < 1 or numteams > 3:
+        raise Http404()
+    teamcookiename = "team"+str(team)
+    teamdata = request.COOKIES.get(teamcookiename, None)
+    url = "/team/edit/?"+teamdata
+    return redirect(url)
+
+def edit(request):
+    teamname = request.GET['teamname']
+    teamnum = request.GET['teamnum']
+    scoring = request.GET['scoring']
+    players = []
+    for x in range(1,16):
+        getstr = "player"+str(x)
+        players.append(request.GET[getstr])
+    while len(players)<15:
+        players.append('empty')
+    return render(request, 'edit_team.html', {'teamname':teamname, 'players':players, 'scoring':scoring, 'teamnum':teamnum})
 
 def player_points(request):
     scoring = request.GET['scoring']

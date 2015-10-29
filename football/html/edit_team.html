@@ -1,0 +1,94 @@
+{% extends 'external/main.html' %}
+
+{% block title %}Edit {{ teamname }} | Fantasy Football Predictor{% endblock %}
+
+{% load staticfiles %}
+{% block cssarea %}
+    <link href="{% static 'css/loading.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<!-- Placeholder for now -->
+<aside class="call-to-action bg-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Edit {{ teamname }}</h1>
+            </div>
+        </div>
+    </div>
+</aside>
+{% if toomany %}
+    <aside class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>You already have 3 teams, you cannot create any more!</h2>
+                    <h3>Click <a href="/">here</a> to return home</h3>
+                </div>
+            </div>
+        </div>
+    </aside>
+{% else %}
+    <aside class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <i id="scoring" style="display: none;">{{ scoring }}</i>
+                    <form class="form-inline" id="teamform">
+                        <div class="form-group">
+                            <h3 for="team_name">Team Name</h3>
+                            <input type="text" class="form-control" id="teamname" name="teamname" value="{{ teamname }}" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <h3>Scoring Type</h3>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="standard" value="standard" required> Standard
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="decimal" value="decimal" required> Decimal
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="standard_ppr" value="standard_ppr" required> Standard PPR
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="decimal_ppr" value="decimal_ppr" required> Decimal PPR
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="standard_half_ppr" value="standard_half_ppr" required> Standard Half PPR
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="scoring" id="decimal_half_ppr" value="decimal_half_ppr" required> Decimal Half PPR
+                            </label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <h3>Players</h3>
+                            <p class="text-muted">Limit of 15 Total Players</p>
+                            <p class="text-muted">This does not create a team in a fantasy football league, it reports stats of a fantasy football team with these players.</p>
+                            <p class="text-muted">Use this to track your real fantasy football team.</p>
+                            <p class="text-muted">D/ST are not accepted.</p>
+                            <p class="text-muted">If you have less than 15 total players, type "empty" as the player name.</p>
+                        </div>
+                        <br>
+                        {% for player in players %}
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="player{{ forloop.counter }}" name="player{{ forloop.counter }}" value="{{ player }}" required>
+                            </div>
+                        {% endfor %}
+                        <br>
+                        <br>
+                        <input type="hidden" id="teamnum" name="teamnum" value="{{ teamnum }}"></input>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <div class="modal">
+    </div>
+{% endif %}
+{% endblock %}
+{% block scriptarea %}
+    <script src="{% static 'js/new_team.js' %}"></script>
+{% endblock %}
