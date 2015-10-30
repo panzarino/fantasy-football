@@ -20,7 +20,9 @@
         <div class="row">
           <div class="col-lg-2"></div>
             <div class="col-lg-8 text-center">
-              <h4><a href="/team/edit/{{ teamnum }}/">Edit Team</a></h4>
+              <h4><a href="/team/edit/{{ teamnum }}/">Edit Team</a> <a class="text-warning" style="cursor: pointer;" id="delete">Delete Team</a></h4>
+              <i id="teamnum" style="display: none;">{{ teamnum }}</i>
+              <i id="teamname" style="display: none;">{{ teamname }}</i>
                 <table class="table">
                   <thead>
                     <tr>
@@ -89,4 +91,5 @@
 {% endblock %}
 {% block scriptarea %}
 <script src="{% static 'js/points.js' %}"></script>
+<script src="{% static 'js/delete_team.js' %}"></script>
 {% endblock %}
