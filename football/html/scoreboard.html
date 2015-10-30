@@ -1,6 +1,6 @@
 {% extends 'external/main.html' %}
 
-{% block title %}Current Scoreboard (Week {{ week }}) | Fantasy Football Predictor{% endblock %}
+{% block title %}Week {{ week }} Scoreboard {% if current_week %}(Current Week){% endif %} | Fantasy Football Predictor{% endblock %}
 
 {% load staticfiles %}
 
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>Current Scoreboard (Week {{ week }})</h1>
+                <h1>Week {{ week }} Scoreboard {% if current_week %}(Current Week){% endif %}</h1>
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown">
                         Previous Weeks
@@ -26,7 +26,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdown">
                         {% for wk in past_weeks reversed %}
                             {% if forloop.first %}
-                                <li><a href="/scoreboard/" class="loading-link">Current Scoreboard (Week {{ wk }})</a></li>
+                                <li><a href="/scoreboard/" class="loading-link">Week {{ wk }} (Current Week)</a></li>
                             {% else %}
                                 <li><a href="/scoreboard/{{ wk }}/" class="loading-link">Week {{ wk }}</a></li>
                             {% endif %}

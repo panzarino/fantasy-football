@@ -75,7 +75,7 @@ def scoreboard(request):
     weeks = []
     for x in range(0,current_week):
         weeks.append(x+1)
-    return render(request, 'scoreboard.html', {'scores':scores,'week':current_week, 'past_weeks':weeks})
+    return render(request, 'scoreboard.html', {'scores':scores,'week':current_week, 'past_weeks':weeks, 'current_week':True})
 
 def previous_scoreboard(request, offset):
     try:
@@ -93,7 +93,7 @@ def previous_scoreboard(request, offset):
     weeks = []
     for x in range(0,current_week):
         weeks.append(x+1)
-    return render(request, 'previous_scoreboard.html', {'scores':scores,'week':wk, 'past_weeks':weeks})
+    return render(request, 'scoreboard.html', {'scores':scores,'week':wk, 'past_weeks':weeks, 'current_week':False})
 
 def teamnum(request, offset):
     numteams = request.COOKIES.get('teams', None)
