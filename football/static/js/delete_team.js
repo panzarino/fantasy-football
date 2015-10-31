@@ -42,7 +42,7 @@ $("#delete").click(function(event) {
             setCookie(thisteamname, "", -1);
         }
         setCookie("teams", --numteams, 180);
+        var url = "/team/all/";
+        window.location.assign(url);
     }
-    var url = "/team/all/";
-    window.location.assign(url);
 })
