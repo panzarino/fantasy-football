@@ -25,23 +25,34 @@ $("#delete").click(function(event) {
     var teamname = $("#teamname").text();
     var numteams = getCookie("teams");
     if(confirm("Are you sure you want to delete "+teamname+"?")){
-        for (var x=numteams; x>teamnum; x--){
-            var team = "team"+x;
-            var teamcookiename = "team"+(x-1);
-            var resetteamdata = getCookie(team);
-            if (resetteamdata!=""){
-                setCookie(teamcookiename, resetteamdata, 180);
+        if (teamnum!=1){
+            for (var x=numteams; x>teamnum; x--){
+                var team = "team"+x;
+                var teamcookiename = "team"+(x-1);
+                var resetteamdata = getCookie(team);
+                if (resetteamdata!=""){
+                    setCookie(teamcookiename, resetteamdata, 180);
+                }
+                var thisteamname = "teamname"+x;
+                var teamnamecookiename = "teamname"+(x-1);
+                var teamnamedata = getCookie(thisteamname);
+                if (teamnamedata!=""){
+                    setCookie(teamnamecookiename, teamnamedata, 180);
+                }
+                setCookie(team, "", -1);
+                setCookie(thisteamname, "", -1);
             }
-            var thisteamname = "teamname"+x;
-            var teamnamecookiename = "teamname"+(x-1)
-            var teamnamedata = getCookie(thisteamname);
-            if (teamnamedata!=""){
-                setCookie(teamnamecookiename, teamnamedata, 180);
-            }
-            setCookie(team, "", -1);
-            setCookie(thisteamname, "", -1);
+            setCookie("teams", --numteams, 180);
         }
-        setCookie("teams", --numteams, 180);
+        else{
+            for (var x=numteams; x>0; x--){
+                var team = "team"+x;
+                var teamname = "teamname"+x;
+                setCookie(team, "", -1);
+                setCookie(teamname, "", -1);
+            }
+        setCookie("teams", '', -1);
+        }
         var url = "/team/all/";
         window.location.assign(url);
     }
