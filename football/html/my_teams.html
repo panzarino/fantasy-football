@@ -22,11 +22,14 @@
                 {% for name in teamnames %}
                     <h3><a href="/team/{{ forloop.counter }}/" class="team-link loading-link">{{ name }}</a></h3>
                 {% endfor %}
+                <br><br>
                 <h3><a href="/team/new/">Create a New Team</a></h3>
+                <h3><a class="text-warning" style="cursor: pointer;" id="delete">Delete All Teams</a></h3>
             </div>
         </div>
     </div>
 </aside>
 {% endblock %}
 {% block scriptarea %}
+<script src="{% static 'js/delete_all.js' %}"></script>
 {% endblock %}
