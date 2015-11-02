@@ -34,7 +34,7 @@ def bye_week_player(name, year):
         for i in games:
             weekteams.append(i.home)
             weekteams.append(i.away)
-        if team not in weekteams and weekteams!=[]:
+        if team not in weekteams and weekteams != []:
             return x
     return None
 
@@ -51,7 +51,7 @@ def opponent(team, year, week):
     # returns opponent in a certain week
     schedule = nflgame.sched.games
     for x in schedule:
-        if schedule[x]['week']==week and schedule[x]['year']==year:
+        if schedule[x]['week'] == week and schedule[x]['year'] == year:
             if schedule[x]['home'] == team:
                 return schedule[x]['away']
             elif schedule[x]['away'] == team:
