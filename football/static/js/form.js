@@ -35,11 +35,11 @@ $("#searchform").submit(function(event) {
 
     // stop form from submitting normally
     event.preventDefault();
+    // display loading icon
+    $("body").addClass("loading");
     // get form data
     var $form = $(this);
     var url = $form.attr("action");
-    // before send
-    $("body").addClass("loading");
     
     // set scoring type cookie
     var scoring = $('input:radio[name=scoring]:checked').val();
