@@ -15,19 +15,20 @@ def player_stats(name, year, wk):
     player = playerlist[0]
     player_id = player.gsis_id
     player_position = player.position
+    player_team = player.team
     if player_position == 'RB' or player_position == 'WR' or player_position == 'TE' or player_position == 'QB':
-        output = main_stats(player_id, year, wk)
+        output = main_stats(player_id, year, wk, player_team)
     elif player_position == "K":
-        output = k_stats(player_id, year, wk)
+        output = k_stats(player_id, year, wk, player_team)
     else:
         output = False
     return output
 
-def main_stats(player_id, year, wk):
-    # takes player's id, year of game(s), week of game(s)
+def main_stats(player_id, year, wk, team):
+    # takes player's id, year of game(s), week of game(s), player team
     # applies for all skill position players (QB, RB, WR, TE)
     stats = {'rushing_yds':0, 'rushing_tds':0, 'receiving_yds':0, 'receiving_tds':0, 'fumbles':0, 'puntret_tds':0, 'kickret_tds':0, 'rushing_2pt':0, 'receiving_2pt':0, 'passing_yds':0, 'passing_tds':0, 'passing_ints':0, 'passing_2pt':0, 'receptions':0}
-    games = nflgame.games(year, week=wk)
+    games = nflgame.games(year, week=wk, home=team, away=team)
     gameplayers = nflgame.combine_game_stats(games)
     for p in gameplayers:
         if p.playerid == player_id:
@@ -47,11 +48,11 @@ def main_stats(player_id, year, wk):
             stats['receptions']=p.receiving_rec
     return stats
 
-def k_stats(player_id, year, wk):
-    # takes player's full name, year of game(s), week of game(s)
+def k_stats(player_id, year, wk, team):
+    # takes player's full name, year of game(s), week of game(s), player team
     # applies for all kickers
     stats = {'fgmade':0, 'fga':0, 'xpmade':0, 'xpa':0}
-    games = nflgame.games(year, week=wk)
+    games = nflgame.games(year, week=wk, home=team, away=team)
     gameplayers = nflgame.combine_game_stats(games)
     for p in gameplayers:
         if p.playerid == player_id:
