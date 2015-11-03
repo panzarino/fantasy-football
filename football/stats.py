@@ -61,10 +61,10 @@ def k_stats(player_id, year, wk):
             stats['xpa']=p.kicking_xpa
     return stats
 
-def d_stats(team_symbol, year, wk):
+def defense_team_stats(team_symbol, year, wk):
     # takes team symbol, year of games(s), week of game(s)
-    # used for D/ST stats
-    stats = {'rushing_yds_allowed':0, 'rushing_tds_allowed':0, 'passing_yds_allowed':0, 'passing_tds_allowed':0, 'total_points_allowed':0, 'passing_ints':0, 'fumbles_forced':0, 'top_rec_performances':{}}
+    # used for defensive team stats
+    stats = {'rushing_yds_allowed':0, 'rushing_tds_allowed':0, 'passing_yds_allowed':0, 'passing_tds_allowed':0, 'total_points_allowed':0, 'passing_ints':0, 'fumbles_forced':0}
     games = nflgame.games(year, week=wk, home=team_symbol, away=team_symbol)
     gameplayers = nflgame.combine_game_stats(games)
     for g in games:
@@ -74,22 +74,31 @@ def d_stats(team_symbol, year, wk):
             stats['total_points_allowed']=g.score_away
     for p in gameplayers:
         if p.team != team_symbol:
-            stats['rushing_tds_allowed']+=p.rushing_yds
+            stats['rushing_yds_allowed']+=p.rushing_yds
             stats['rushing_tds_allowed']+=p.rushing_tds
-            stats['passing_tds_allowed']+=p.passing_yds
+            stats['passing_yds_allowed']+=p.passing_yds
             stats['passing_tds_allowed']+=p.passing_tds
             stats['passing_ints']+=p.passing_ints
             stats['fumbles_forced']+=p.fumbles_tot
-    numrec = 0
-    for p in gameplayers.receiving().sort('receiving_yds'):
-        if numrec <= 1:
-            if p.team != team_symbol:
-                stats['top_rec_performances'][p.name]={}
-                stats['top_rec_performances'][p.name]['receiving_yds']=p.receiving_yds
-                stats['top_rec_performances'][p.name]['receiving_tds']=p.receiving_tds
-                numrec+=1
-        else:
-            break
+    return stats
+
+def offense_team_stats(team_symbol, year, wk):
+    # takes team symbol, year of games(s), week of game(s)
+    # used for offensive team stats
+    stats = {'rushing_yds':0, 'rushing_tds':0, 'passing_yds':0, 'passing_tds':0, 'total_points':0}
+    games = nflgame.games(year, week=wk, home=team_symbol, away=team_symbol)
+    gameplayers = nflgame.combine_game_stats(games)
+    for g in games:
+        if g.home == team_symbol:
+            stats['total_points']=g.score_home
+        if g.away == team_symbol:
+            stats['total_points']=g.score_away
+    for p in gameplayers:
+        if p.team == team_symbol:
+            stats['rushing_yds']+=p.rushing_yds
+            stats['rushing_tds']+=p.rushing_tds
+            stats['passing_yds']+=p.passing_yds
+            stats['passing_tds']+=p.passing_tds
     return stats
 
 def player_position(name):
