@@ -70,9 +70,9 @@ def defense_team_stats(team_symbol, year, wk):
     gameplayers = nflgame.combine_game_stats(games)
     for g in games:
         if g.home != team_symbol:
-            stats['total_points_allowed']=g.score_home
+            stats['total_points_allowed']+=g.score_home
         if g.away != team_symbol:
-            stats['total_points_allowed']=g.score_away
+            stats['total_points_allowed']+=g.score_away
     for p in gameplayers:
         if p.team != team_symbol:
             stats['rushing_yds_allowed']+=p.rushing_yds
@@ -91,9 +91,9 @@ def offense_team_stats(team_symbol, year, wk):
     gameplayers = nflgame.combine_game_stats(games)
     for g in games:
         if g.home == team_symbol:
-            stats['total_points']=g.score_home
+            stats['total_points']+=g.score_home
         if g.away == team_symbol:
-            stats['total_points']=g.score_away
+            stats['total_points']+=g.score_away
     for p in gameplayers:
         if p.team == team_symbol:
             stats['rushing_yds']+=p.rushing_yds

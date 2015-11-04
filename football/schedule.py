@@ -56,4 +56,4 @@ def opponent(team, year, week):
                 return schedule[x]['away']
             elif schedule[x]['away'] == team:
                 return schedule[x]['home']
-    return False
+    return None
