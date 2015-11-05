@@ -33,6 +33,19 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center">
+                    <h3>Stats</h3>
+                    {% for key, val in total_stats.items %}
+                        <p>{{ key }}: {{ val }}</p>
+                    {% endfor %}
+                </div>
+                <div class="col-lg-6 text-center">
+                    <h3>Predictions</h3>
+                </div>
+            </div>
+        </div>
     </aside>
 {% endif %}
 {% endblock %}
