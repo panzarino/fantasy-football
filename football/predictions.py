@@ -103,7 +103,7 @@ def prediction(name, scoring):
         prediction_rushing_tds = round(player_rushing_tds_pct*(player_avg_rushing_tds+opponent_avg_rushing_tds)/2)
         # percentages are generally very low for good players
         if (prediction_rushing_tds == 0 and player_rushing_tds_pct > .35) or weeks_played-player_avg_rushing_tds<4:
-            prediction_rushing_tds = 1.0
+            prediction_rushing_tds += 1.0
         # calculate receiving yds
         player_avg_receiving_yds = float(total_player_stats['receiving_yds'])/weeks_played
         player_receiving_yds_pct = float(total_player_stats['receiving_yds'])/total_team_stats['passing_yds'] # percentage of total yds the player contributes
@@ -116,7 +116,7 @@ def prediction(name, scoring):
         prediction_receiving_tds = round(player_receiving_tds_pct*(player_avg_receiving_tds+opponent_avg_receiving_tds)/2)
         # percentages are generally very low for good players
         if (prediction_receiving_tds == 0 and player_receiving_tds_pct > .25) or weeks_played-player_avg_receiving_tds<4:
-            prediction_receiving_tds = 1.0
+            prediction_receiving_tds += 1.0
         # calculate total points
         prediction_total_points = prediction_rushing_yds*.1 + prediction_rushing_tds*6 + prediction_receiving_yds*.1 + prediction_receiving_tds*6
         # return predictions
