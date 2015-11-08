@@ -10,14 +10,12 @@ def get_stats(name, year, wks):
     player = playersearch[0]
     byeweek = schedule.bye_week(player.team, year)
     player_stats = {}
+    wks.remove(byeweek)
     for x in range(0, len(wks)):
         dictprop = 'Week '+str(wks[x])
         player_stats[dictprop]=(stats.player_stats(name, year, wks[x]))
         player_stats[dictprop]['week']=wks[x]
-        if wks[x] == byeweek:
-            player_stats[dictprop]['bye_week'] = True
-        else:
-            player_stats[dictprop]['bye_week'] = False
+        player_stats[dictprop]['bye_week'] = False
     return player_stats
 
 def standard_player_points(name, year, wks):

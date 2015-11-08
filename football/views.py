@@ -65,7 +65,7 @@ def results(request):
     graph_ordered_total_points = OrderedDict(sorted(graph_total_points.items()))
     total_stats = stats.total_stats(name, year, week)
     output_total_stats = OrderedDict(sorted(total_stats.items(), key=operator.itemgetter(1), reverse=True))
-    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':output_total_stats, 'results':results, 'scoring':scoring, 'graph_ordered_total_points':graph_ordered_total_points, 'bye_week':bye_week, 'position':position, 'qb':qb, 'flex':flex, 'k':k, 'average':average_points})
+    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':output_total_stats, 'results':results, 'scoring':scoring, 'graph_ordered_total_points':graph_ordered_total_points, 'bye_week':bye_week, 'position':position, 'qb':qb, 'flex':flex, 'k':k})
 
 def scoreboard(request):
     current_week = schedule.current_week()
