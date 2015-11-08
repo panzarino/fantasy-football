@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
 from django.core import serializers
-from football import points, stats, schedule
+from football import points, stats, schedule, predictions
 import nflgame # https://github.com/BurntSushi/nflgame/
 from datetime import date
 from collections import OrderedDict
@@ -65,7 +65,11 @@ def results(request):
     graph_ordered_total_points = OrderedDict(sorted(graph_total_points.items()))
     total_stats = stats.total_stats(name, year, week)
     output_total_stats = OrderedDict(sorted(total_stats.items(), key=operator.itemgetter(1), reverse=True))
-    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':output_total_stats, 'results':results, 'scoring':scoring, 'graph_ordered_total_points':graph_ordered_total_points, 'bye_week':bye_week, 'position':position, 'qb':qb, 'flex':flex, 'k':k})
+    average_points = predictions.average(name, scoring)
+    prediction = predictions.prediction(name, scoring)
+    if prediction == "Bye Week":
+        prediction = {'points':"Bye Week"}
+    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':output_total_stats, 'results':results, 'scoring':scoring, 'graph_ordered_total_points':graph_ordered_total_points, 'bye_week':bye_week, 'position':position, 'qb':qb, 'flex':flex, 'k':k, 'average':average_points, 'prediction':prediction['points'], 'predictions':prediction})
 
 def scoreboard(request):
     current_week = schedule.current_week()
