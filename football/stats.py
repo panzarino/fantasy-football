@@ -108,3 +108,10 @@ def player_position(name):
         return False
     player = playerlist[0]
     return player.position
+
+def player_team(name):
+    playerlist = nflgame.find(name, team=None)
+    if playerlist == []:
+        return False
+    player = playerlist[0]
+    return player.team
