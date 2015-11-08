@@ -26,20 +26,9 @@ def results(request):
         weeks.append(x)
     position = stats.player_position(name)
     if position == "QB" or position == "RB" or position == "WR" or position == "TE":
-        if scoring == 'standard':
-            results = points.standard_player_points(name, year, weeks)
-        elif scoring == 'decimal':
-            results = points.decimal_player_points(name, year, weeks)
-        elif scoring == 'standard_ppr':
-            results = points.standard_ppr_player_points(name, year, weeks)
-        elif scoring == 'decimal_ppr':
-            results = points.decimal_ppr_player_points(name, year, weeks)
-        elif scoring == 'standard_half_ppr':
-            results = points.standard_half_ppr_player_points(name, year, weeks)
-        elif scoring == 'decimal_half_ppr':
-            results = points.decimal_half_ppr_player_points(name, year, weeks)
-        else:
-            return render(request, 'results.html', {'error':True, 'title':"Error"})
+        functionname = scoring+"_player_points"
+        getpoints = getattr(points, functionname)
+        results = getpoints(name, year, weeks)
     elif position == "K":
         results = points.k_points(name, year, weeks)
     else:
