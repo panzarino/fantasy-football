@@ -1,5 +1,4 @@
 import nflgame # https://github.com/BurntSushi/nflgame
-from football import schedule
 
 def total_stats(name, year, max_wk):
     wks = []
