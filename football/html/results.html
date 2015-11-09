@@ -43,6 +43,14 @@
                 </div>
                 <div class="col-lg-6 text-center">
                     <h3>Predictions</h3>
+                    <p>Avearge Points: {{ average }}</p>
+                    <br>
+                    <p><b>Predicted Points: {{ prediction }}</b></p>
+                    <br>
+                    <h4>Predicted Stats</h4>
+                    {% for key, val in predictions.items %}
+                        <p>{{ key }}: {{ val }}</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>

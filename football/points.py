@@ -10,7 +10,10 @@ def get_stats(name, year, wks):
     player = playersearch[0]
     byeweek = schedule.bye_week(player.team, year)
     player_stats = {}
-    wks.remove(byeweek)
+    try:
+        wks.remove(byeweek)
+    except ValueError:
+        wks=wks
     for x in range(0, len(wks)):
         dictprop = 'Week '+str(wks[x])
         player_stats[dictprop]=(stats.player_stats(name, year, wks[x]))
