@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
 from django.core import serializers
-from football import points, stats, schedule, predictions
+from football import points, stats, schedule, predictions, convert
 import nflgame # https://github.com/BurntSushi/nflgame/
 from datetime import date
 from collections import OrderedDict
@@ -54,17 +54,38 @@ def results(request):
     ordered_total_points = OrderedDict(sorted(total_points.items()))
     graph_ordered_total_points = OrderedDict(sorted(graph_total_points.items()))
     total_stats = stats.total_stats(name, year, week)
-    output_total_stats = OrderedDict(sorted(total_stats.items(), key=operator.itemgetter(1), reverse=True))
+    if position == "QB" or position == "RB" or position == "WR" or position == "TE":
+        output_total_stats = convert.main_stats(total_stats)
+        sorted_output_total_stats = OrderedDict(sorted(output_total_stats.items(), key=operator.itemgetter(1), reverse=True))
+    elif position == "K":
+        output_total_stats = convert.k_stats(total_stats)
+        sorted_output_total_stats = OrderedDict(sorted(output_total_stats.items(), key=operator.itemgetter(1), reverse=True))
+    else:
+        return render(request, 'results.html', {'error':True, 'title':"Error"})
     average_points = predictions.average(name, scoring)
     prediction_stats = predictions.prediction(name, scoring)
     if prediction_stats == "Bye Week":
         prediction_points = "Bye Week"
-        output_prediction_stats = {'Bye Week': "Bye Week"}
+        sorted_output_prediction_stats = {'Bye Week': "Bye Week"}
     else:
-        prediction_points = prediction_stats['points']
-        prediction_stats.pop('points', None)
-        output_prediction_stats = OrderedDict(sorted(prediction_stats.items(), key=operator.itemgetter(1), reverse=True))
-    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':output_total_stats, 'results':results, 'scoring':scoring, 'graph_ordered_total_points':graph_ordered_total_points, 'bye_week':bye_week, 'position':position, 'team':team, 'qb':qb, 'flex':flex, 'k':k, 'average':average_points, 'predictions':output_prediction_stats, 'prediction':prediction_points})
+        if position == "QB":
+            prediction_points = prediction_stats['points']
+            output_prediction_stats = convert.qb_prediction(prediction_stats)
+            sorted_output_prediction_stats = OrderedDict(sorted(output_prediction_stats.items(), key=operator.itemgetter(1), reverse=True))
+        elif position == "RB":
+            prediction_points = prediction_stats['points']
+            output_prediction_stats = convert.rb_prediction(prediction_stats)
+            sorted_output_prediction_stats = OrderedDict(sorted(output_prediction_stats.items(), key=operator.itemgetter(1), reverse=True))
+        elif position == "WR" or position == "TE":
+            prediction_points = prediction_stats['points']
+            output_prediction_stats = convert.rec_prediction(prediction_stats)
+            sorted_output_prediction_stats = OrderedDict(sorted(output_prediction_stats.items(), key=operator.itemgetter(1), reverse=True))
+        elif position == "K":
+            prediction_points = prediction_stats
+            sorted_output_prediction_stats = {'Points':prediction_points}
+        else:
+            return render(request, 'results.html', {'error':True, 'title':"Error"})
+    return render(request, 'results.html', {'title':name, 'name':name, 'total_stats':sorted_output_total_stats, 'results':results, 'scoring':scoring, 'graph_ordered_total_points':graph_ordered_total_points, 'bye_week':bye_week, 'position':position, 'team':team, 'qb':qb, 'flex':flex, 'k':k, 'average':average_points, 'predictions':sorted_output_prediction_stats, 'prediction':prediction_points})
 
 def scoreboard(request):
     current_week = schedule.current_week()
