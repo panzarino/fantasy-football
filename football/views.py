@@ -239,6 +239,9 @@ def player_points(request):
     position = request.GET['position']
     year = date.today().year
     current_week = schedule.current_week()
+    bye_week = schedule.bye_week_player(name, year)
+    if current_week == bye_week:
+        return HttpResponse("Bye Week")
     dictkey = "Week "+str(current_week)
     current_week = [current_week]
     if position == "QB" or position == "RB" or position == "WR" or position == "TE":
