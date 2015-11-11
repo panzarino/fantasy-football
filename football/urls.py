@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^team/new/$', views.new_team),
     url(r'^team/all/$', views.team_list),
     url(r'^points/$', views.player_points),
+    url(r'^prediction/$', views.prediction),
     url(r'^team/edit/(\d{1})/$', views.edit_team),
     url(r'^team/edit/$', views.edit),
     

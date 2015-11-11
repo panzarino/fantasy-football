@@ -254,3 +254,14 @@ def player_points(request):
         pts = points.k_points(name, year, current_week)
         total_points = points.total_points(pts)[dictkey]
         return HttpResponse(total_points)
+
+def prediction(request):
+    scoring = request.GET['scoring']
+    name = request.GET['name']
+    year = date.today().year
+    current_week = schedule.current_week()
+    bye_week = schedule.bye_week_player(name, year)
+    if current_week == bye_week:
+        return HttpResponse("Bye Week")
+    prediction = predictions.prediction(name, scoring)
+    return HttpResponse(prediction['points'])
