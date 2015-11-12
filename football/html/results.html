@@ -65,7 +65,7 @@
 {% block scriptarea %}
     <script src="{% static 'external/js/Chart.min.js' %}"></script>
     <script>
-    // create chart with data
+        // chart data
         var data = {
             labels: [{% for week, val in graph_ordered_total_points.items %}"{{ week }}"{% if not forloop.last %}, {% endif %}{% endfor %}],
             datasets: [
@@ -81,8 +81,18 @@
                 }
             ]
         }
-        var ctx = document.getElementById("totalPointsChart").getContext("2d");
-        var totalPointsChart = new Chart(ctx).Line(data, {responsive: true, scaleBeginAtZero: true});
+        
+        var ctx;
+        var totalPointsChart;
+        
+        // function to create the chart
+        function newChart(dataset){
+            ctx = document.getElementById("totalPointsChart").getContext("2d");
+            totalPointsChart = new Chart(ctx).Line(dataset, {responsive: true, scaleBeginAtZero: true});
+        }
+        
+        // create the original chart
+        newChart(data);
         
         // display predictions when checked or hide when unchecked
         $('#show-prediction').change(function(){
@@ -91,7 +101,27 @@
                 totalPointsChart.update();
             }
             else {
-                // hide when unchecked
+                // destroy original
+                totalPointsChart.destroy();
+                
+                var originaldata = {
+                    labels: [{% for week, val in graph_ordered_total_points.items %}"{{ week }}"{% if not forloop.last %}, {% endif %}{% endfor %}],
+                    datasets: [
+                        {
+                            label: "Overall Points",
+                            fillColor: "rgba(0,90,160,0.2)",
+                            strokeColor: "rgba(0,90,160,1)",
+                            pointColor: "rgba(0,90,160,1)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(220,220,220,1)",
+                            data: [{% for week, val in graph_ordered_total_points.items %}{{ val }}{% if not forloop.last %}, {% endif %}{% endfor %}]
+                        }
+                    ]
+                }
+        
+                // draw new chart
+                newChart(originaldata);
             }
         });
     </script>
